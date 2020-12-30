@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:minHeight="300dp"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:paddingVertical="@dimen/activity_vertical_margin"
+        tools:context="com.androidbull.meme.generator.ui.dialogs.CaptionSettingsDialog">
+
+
+        <TextView
+            android:id="@+id/tvFontLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:text="@string/str_font"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/flSpnFont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin_micro"
+            android:background="@drawable/bg_font_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFontLabel">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spnFont"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="?colorControlNormal" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/tvTextSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/str_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flSpnFont" />
+
+        <com.warkiz.widget.IndicatorStayLayout
+            android:id="@+id/islFontSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTextSize">
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:id="@+id/isbFontSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isb_indicator_color="@color/app_red"
+                app:isb_show_indicator="rounded_rectangle"
+                app:isb_show_tick_marks_type="oval"
+                app:isb_show_tick_texts="true"
+                app:isb_thumb_adjust_auto="false"
+                app:isb_thumb_color="@color/app_red"
+                app:isb_tick_marks_color="@color/seekbar_ticks_color"
+                app:isb_tick_marks_size="6dp"
+                app:isb_tick_texts_color="@android:color/transparent"
+                app:isb_ticks_count="9"
+                app:isb_track_background_color="@color/color_seekbar_track_background"
+                app:isb_track_progress_color="@color/app_red" />
+        </com.warkiz.widget.IndicatorStayLayout>
+
+
+        <TextView
+            android:id="@+id/tvOutlineSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
+            android:text="@string/str_outline_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/islFontSize" />
+
+        <com.warkiz.widget.IndicatorStayLayout
+            android:id="@+id/islOutlineSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOutlineSize">
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:id="@+id/isbOutlineSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isb_indicator_color="@color/app_red"
+                app:isb_show_indicator="rounded_rectangle"
+                app:isb_show_tick_marks_type="oval"
+                app:isb_show_tick_texts="true"
+                app:isb_thumb_adjust_auto="false"
+                app:isb_thumb_color="@color/app_red"
+                app:isb_tick_marks_color="@color/seekbar_ticks_color"
+                app:isb_tick_marks_size="6dp"
+                app:isb_tick_texts_color="@android:color/transparent"
+                app:isb_ticks_count="5"
+                app:isb_track_background_color="@color/color_seekbar_track_background"
+                app:isb_track_progress_color="@color/app_red" />
+        </com.warkiz.widget.IndicatorStayLayout>
+
+
+        <TextView
+            android:id="@+id/tvMaxLines"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
+            android:text="@string/str_max_lines"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/islOutlineSize" />
+
+        <com.warkiz.widget.IndicatorStayLayout
+            android:id="@+id/islMaxLines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMaxLines">
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:id="@+id/isbMaxLines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isb_indicator_color="@color/app_red"
+                app:isb_show_indicator="rounded_rectangle"
+                app:isb_show_tick_marks_type="oval"
+                app:isb_show_tick_texts="true"
+                app:isb_thumb_adjust_auto="false"
+                app:isb_thumb_color="@color/app_red"
+                app:isb_tick_marks_color="@color/seekbar_ticks_color"
+                app:isb_tick_marks_size="6dp"
+                app:isb_tick_texts_color="@android:color/transparent"
+                app:isb_ticks_count="11"
+                app:isb_track_background_color="@color/color_seekbar_track_background"
+
+                app:isb_track_progress_color="@color/app_red" />
+        </com.warkiz.widget.IndicatorStayLayout>
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin_small"
+            android:text="@string/str_ok"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/islMaxLines" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin_small"
+            android:text="@string/str_cancel"
+            app:layout_constraintEnd_toStartOf="@id/btnOk"
+            app:layout_constraintTop_toBottomOf="@id/islMaxLines" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

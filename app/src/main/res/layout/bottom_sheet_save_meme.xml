@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnSaveToDevice"
+        style="?borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:text="@string/str_save_to_device"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnSaveAsTemplate"
+        style="?borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:text="@string/str_save_as_editable_template"
+        android:textAllCaps="false" />
+
+
+    <Button
+        android:id="@+id/btnUploadNewMeme"
+        style="?borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:text="Upload New Meme"
+        android:textAllCaps="false" />
+
+
+</LinearLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/parentLayout"
+    android:layout_height="match_parent"
+    tools:context="com.androidbull.meme.generator.ui.activities.MemeGeneratorActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tbMemeCreator"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:titleTextColor="@color/white" />
+
+    <EditText
+        android:id="@+id/etEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/ibEditTextSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbMemeCreator"
+        tools:ignore="LabelFor" />
+
+    <ImageButton
+        android:id="@+id/ibEditTextSettings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:backgroundTint="#878787"
+        android:contentDescription="@string/cd_todo"
+        android:src="@drawable/ic_text_settings_2"
+        app:layout_constraintBottom_toBottomOf="@id/etEditText"
+        app:layout_constraintEnd_toStartOf="@id/ibEditTextColorDialog"
+        app:layout_constraintStart_toEndOf="@id/etEditText"
+        app:layout_constraintTop_toBottomOf="@id/tbMemeCreator" />
+
+    <ImageButton
+        android:id="@+id/ibEditTextColorDialog"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#878787"
+        android:contentDescription="@string/cd_todo"
+        android:src="@drawable/ic_caption_color"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/etEditText"
+        app:layout_constraintEnd_toStartOf="@id/ibDeleteText"
+        app:layout_constraintStart_toEndOf="@id/ibEditTextSettings"
+        app:layout_constraintTop_toTopOf="@id/etEditText" />
+
+    <ImageButton
+        android:id="@+id/ibDeleteText"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin_micro"
+        android:backgroundTint="#878787"
+        android:contentDescription="@string/cd_todo"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/etEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ibEditTextColorDialog"
+        app:layout_constraintTop_toTopOf="@id/etEditText" />
+
+
+    <ja.burhanrashid52.photoeditor.PhotoEditorView
+        android:id="@+id/photoEditorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/btnAddText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEditText" />
+
+    <Button
+        android:id="@+id/btnAddText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:text="@string/str_add_text"
+        app:layout_constraintBottom_toTopOf="@id/btnUndo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/btnUndo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin_micro"
+        android:layout_marginBottom="@dimen/activity_vertical_margin_small"
+        android:maxLines="1"
+        android:text="@string/str_undo"
+        app:layout_constraintBottom_toTopOf="@id/flBannerAdContainer"
+        app:layout_constraintEnd_toStartOf="@id/btnRedo"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnRedo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin_micro"
+        android:maxLines="1"
+        android:text="@string/str_redo"
+        app:layout_constraintBottom_toBottomOf="@id/btnUndo"
+        app:layout_constraintEnd_toStartOf="@id/btnSave"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btnUndo"
+        app:layout_constraintTop_toTopOf="@id/btnUndo" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin_micro"
+        android:maxLines="1"
+        android:text="@string/str_save"
+        app:layout_constraintBottom_toBottomOf="@id/btnUndo"
+        app:layout_constraintEnd_toStartOf="@id/btnShare"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btnRedo"
+        app:layout_constraintTop_toTopOf="@id/btnUndo" />
+
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:maxLines="1"
+        android:text="@string/str_share"
+        app:layout_constraintBottom_toBottomOf="@id/btnUndo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btnSave"
+        app:layout_constraintTop_toTopOf="@id/btnUndo" />
+
+
+    <FrameLayout
+        android:id="@+id/flBannerAdContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="etEditText,ibEditTextSettings,ibEditTextColorDialog,ibDeleteText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

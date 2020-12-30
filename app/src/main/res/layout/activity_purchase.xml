@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tbPurchases"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/str_go_premium_"
+        app:titleTextColor="@color/white" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:contentDescription="@string/cd_todo"
+        android:src="@drawable/meme_maker_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <TextView
+        android:id="@+id/tvGoPremium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_go_premium"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/guidelineCenter" />
+
+    <TextView
+        android:id="@+id/tvPremiumBenefitsOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:text="@string/str_ad_free_experience"
+        app:drawableStartCompat="@drawable/premium_benefits_drawable"
+        app:layout_constraintStart_toStartOf="@id/tvGoPremium"
+        app:layout_constraintTop_toBottomOf="@id/tvGoPremium" />
+
+    <TextView
+        android:id="@+id/tvPremiumBenefitsTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_small"
+        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:text="@string/str_priority_updates"
+        app:drawableStartCompat="@drawable/premium_benefits_drawable"
+        app:layout_constraintStart_toStartOf="@id/tvGoPremium"
+        app:layout_constraintTop_toBottomOf="@id/tvPremiumBenefitsOne" />
+
+    <TextView
+        android:id="@+id/tvPremiumBenefitsThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin_small"
+        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:text="@string/str_support_the_developer"
+        app:drawableStartCompat="@drawable/premium_benefits_drawable"
+        app:layout_constraintStart_toStartOf="@id/tvGoPremium"
+        app:layout_constraintTop_toBottomOf="@id/tvPremiumBenefitsTwo" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+
+    <Button
+        android:id="@+id/btnPurchase"
+        style="@style/MemeMakerPurchaseButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin_double"
+        android:text="@string/str_let_s_go"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

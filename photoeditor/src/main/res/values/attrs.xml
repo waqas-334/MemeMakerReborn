@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PhotoEditorView">
+        <attr name="photo_src" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="StrokeTextView">
+        <attr name="textStrokeColor" format="color" />
+        <attr name="textStrokeWidth" format="float" />
+    </declare-styleable>
+
+
+</resources>

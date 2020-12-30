@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/activity_vertical_margin_micro"
+    android:background="?colorSurface">
+
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvMeme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivMeme"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/cd_todo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMemeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_vertical_margin"
+                android:layout_marginVertical="@dimen/activity_vertical_margin_micro"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivMeme"
+                app:layout_constraintStart_toStartOf="@id/ivMeme"
+                app:layout_constraintTop_toBottomOf="@+id/ivMeme" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.androidbull.meme.generator.helper.CheckableImageButton
+            android:id="@+id/cibSelectMeme"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/activity_vertical_margin_micro"
+            android:background="@null"
+            android:contentDescription="@string/cd_todo"
+            android:src="@drawable/btn_select_meme"
+            android:visibility="gone" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>
+
+
+

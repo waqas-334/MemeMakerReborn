@@ -1,0 +1,93 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="269.66dp"
+    android:height="242.02dp"
+    android:viewportWidth="269.66"
+    android:viewportHeight="242.02">
+  <path
+      android:pathData="M51.73,89.08l57.36,-27.13l17.74,19.07l-52.68,25.42l-22.42,-17.36z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M0,213.47c0,-11.11 22.21,-39.66 131.66,-38.07s138,25.38 138,34.9S239.52,242.02 144.35,242.02 0,224.57 0,213.47Z"
+      android:fillColor="#edf2f9"/>
+  <path
+      android:pathData="M58.69,107.19 L115.83,81.81 96.95,63.02a3.54,3.54 0,0 0,-4 -0.7L38.58,88.02a2.43,2.43 0,0 0,-0.4 4.15,109.79 109.79,0 0,1 14.17,8.7C58.69,105.61 58.69,107.19 58.69,107.19Z"
+      android:fillColor="#d4e4fe"/>
+  <path
+      android:pathData="M128.49,131.02v77.72l55,-20.27a8,8 0,0 0,5.24 -7.53L188.73,107.19Z"
+      android:strokeLineJoin="round"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M139.48,127.49l61.56,-23.85 12.38,14a3,3 0,0 1,-0.83 4.61l-55.94,26.45a3.13,3.13 0,0 1,-4 -1.21Z"
+      android:fillColor="#d4e4fe"/>
+  <path
+      android:pathData="M128.49,131.02v77.72l-55,-20.27a8,8 0,0 1,-5.24 -7.53L68.25,116.54l5.18,-7.3Z"
+      android:strokeLineJoin="round"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M72.83,107.02l55.65,-24.5l57.35,24.5l-55.76,23.34l-57.24,-23.34z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M128.49,131.02l60.27,-23.8L201.83,118.96a2.5,2.5 0,0 1,-0.6 4.11l-54.53,25.83a3.35,3.35 0,0 1,-4 -0.89Z"
+      android:strokeWidth="5"
+      android:fillColor="#00000000"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M128.49,131.02l-15.13,16.5a4.72,4.72 0,0 1,-5.44 1.1l-51.81,-23.81a2.5,2.5 0,0 1,-0.48 -4.25l17.34,-13.34Z"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M72.97,107.19l57.1,-25.38L111.22,63.02a3.54,3.54 0,0 0,-4 -0.7L52.83,88.02a2.42,2.42 0,0 0,-0.39 4.15,109.29 109.29,0 0,1 14.16,8.7C72.97,105.61 72.97,107.19 72.97,107.19Z"
+      android:strokeWidth="5"
+      android:fillColor="#00000000"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M130.07,81.81 L145.83,64.63a3.54,3.54 0,0 1,4 -0.86l52.67,22.78a2.64,2.64 0,0 1,0.74 4.36l-17.64,16.28Z"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M163.38,163.93l11.1,-3.42l0,12.81l-11.1,4.27l0,-13.66z"
+      android:fillColor="#d4e4fe"/>
+  <path
+      android:pathData="M166.55,167.1l11.11,-3.42l0,12.82l-11.11,4.26l0,-13.66z"
+      android:fillColor="#60678b"/>
+  <path
+      android:pathData="M254.14,153.19L254.14,173.81"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M244.28,163.05L264.9,163.05"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M86.64,21.69L86.64,42.31"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M76.78,31.55L97.4,31.55"
+      android:strokeWidth="5"
+      android:fillColor="#fff"
+      android:strokeColor="#60678b"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M25.38,12.02m-9.52,0a9.52,9.52 0,1 1,19.04 0a9.52,9.52 0,1 1,-19.04 0"
+      android:strokeWidth="5"
+      android:fillColor="#fddce2"
+      android:strokeColor="#60678b"/>
+  <path
+      android:pathData="M244.28,48.5m-9.52,0a9.52,9.52 0,1 1,19.04 0a9.52,9.52 0,1 1,-19.04 0"
+      android:strokeWidth="5"
+      android:fillColor="#fddce2"
+      android:strokeColor="#60678b"/>
+</vector>

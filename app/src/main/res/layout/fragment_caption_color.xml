@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <com.jaredrummler.android.colorpicker.ColorPickerView
+        android:id="@id/cpv_color_picker_view"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        app:cpv_alphaChannelVisible="true"
+        app:cpv_borderColor="#646464"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.jaredrummler.android.colorpicker.ColorPanelView
+        android:id="@id/cpv_color_panel_old"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin_small"
+        android:layout_weight="0.5"
+        app:cpv_borderColor="#646464"
+        app:cpv_colorShape="square"
+        app:layout_constraintEnd_toStartOf="@id/ivOldToNew"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpv_color_picker_view" />
+
+    <ImageView
+        android:id="@+id/ivOldToNew"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:contentDescription="@string/cd_todo"
+        android:gravity="center"
+        android:src="@drawable/cpv_ic_arrow_right_black_24dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/cpv_color_panel_old"
+        app:layout_constraintEnd_toStartOf="@id/cpv_color_panel_new"
+        app:layout_constraintStart_toEndOf="@id/cpv_color_panel_old"
+        app:layout_constraintTop_toTopOf="@id/cpv_color_panel_old" />
+
+    <com.jaredrummler.android.colorpicker.ColorPanelView
+        android:id="@id/cpv_color_panel_new"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="0.5"
+        app:cpv_borderColor="#646464"
+        app:cpv_colorShape="square"
+        app:layout_constraintBottom_toBottomOf="@id/cpv_color_panel_old"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivOldToNew"
+        app:layout_constraintTop_toTopOf="@id/cpv_color_panel_old" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
