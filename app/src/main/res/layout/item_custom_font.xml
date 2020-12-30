@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/tvCustomFont"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="22sp" />
+
+    <ImageButton
+        android:id="@+id/ibDeleteCustomFont"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin_small"
+        android:backgroundTint="#878787"
+        android:contentDescription="@string/str_delete_custom_font"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/white" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/gpMain"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/mi_memes"
+            android:checked="true"
+            android:title="@string/str_memes" />
+        <item
+            android:id="@+id/mi_saved_memes"
+            android:title="@string/str_saved_memes" />
+
+        <item
+            android:id="@+id/mi_saved_templates"
+            android:title="@string/str_saved_templates" />
+
+        <item
+            android:id="@+id/mi_settings"
+            android:checkable="false"
+            android:title="@string/str_settings" />
+
+        <item
+            android:id="@+id/mi_remove_ads"
+            android:checkable="false"
+            android:title="@string/str_remove_ads" />
+
+        <item
+            android:id="@+id/mi_share_app"
+            android:checkable="false"
+            android:title="@string/str_share_app" />
+
+        <item
+            android:id="@+id/mi_more_apps"
+            android:checkable="false"
+            android:title="@string/str_more_apps" />
+
+        <item
+            android:id="@+id/mi_rate_app"
+            android:checkable="false"
+            android:title="@string/str_rate_app" />
+
+        <item
+            android:id="@+id/mi_privacy_policy"
+            android:checkable="false"
+            android:title="@string/str_privacy_policy" />
+
+        <item
+            android:id="@+id/mi_about"
+            android:checkable="false"
+            android:title="@string/str_about" />
+
+    </group>
+
+    <group
+        android:id="@+id/gpContact"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/mi_contact_us"
+            android:checkable="false"
+            android:title="@string/str_contact_us" />
+
+    </group>
+
+</menu>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "22006868555",
+    "firebase_url": "https://arsal-khan-apps.firebaseio.com",
+    "project_id": "arsal-khan-apps",
+    "storage_bucket": "arsal-khan-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22006868555:android:06de6cf0c039355be4bbce",
+        "android_client_info": {
+          "package_name": "com.androidbull.meme.generator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgtNwg4lQ1cDYaAkUE6aCTPQots4GpEO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
