@@ -5,19 +5,28 @@
     android:background="?colorSurface"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvEmpty"
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/ivEmpty"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-        android:text="@string/str_tap_on_heart_to_add_a_template_to_favourites"
-        android:textSize="18sp"
-        android:visibility="gone"
-        android:gravity="center_horizontal"
+        android:contentDescription="@string/cd_todo"
+        android:src="@drawable/ic_empty_illustration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/str_tap_on_heart_to_add_a_template_to_favourites"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivEmpty" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavouriteMeme"
@@ -28,5 +37,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupEmptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvEmpty,ivEmpty" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
