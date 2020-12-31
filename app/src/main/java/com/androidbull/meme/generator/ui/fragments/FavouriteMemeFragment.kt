@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +23,7 @@ import com.androidbull.meme.generator.ui.interfaces.OnMemeItemClickListener
 
 open class FavouriteMemeFragment : Fragment(), OnMemeItemClickListener {
 
-    private lateinit var tvEmpty: TextView
+    private lateinit var groupEmptyView: Group
     private lateinit var rvFavouriteMeme: RecyclerView
 
     private val favouriteMemes = mutableListOf<Meme2>()
@@ -67,9 +68,9 @@ open class FavouriteMemeFragment : Fragment(), OnMemeItemClickListener {
         favouriteMemesAdapter.updateAdapter(favouriteMemes)
 
         if (favouriteMemes.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
+            groupEmptyView.visibility = View.VISIBLE
         } else {
-            tvEmpty.visibility = View.GONE
+            groupEmptyView.visibility = View.GONE
         }
     }
 
@@ -116,7 +117,7 @@ open class FavouriteMemeFragment : Fragment(), OnMemeItemClickListener {
 
     private fun initUi(view: View) {
         rvFavouriteMeme = view.findViewById(R.id.rvFavouriteMeme)
-        tvEmpty = view.findViewById(R.id.tvEmpty)
+        groupEmptyView = view.findViewById(R.id.groupEmptyView)
 
     }
 
@@ -153,6 +154,11 @@ open class FavouriteMemeFragment : Fragment(), OnMemeItemClickListener {
         if (memeRepository.updateMeme(meme) > 0) {
             favouriteMemes.removeAt(position)
             favouriteMemesAdapter.notifyItemRemoved(position)
+            if (favouriteMemes.isEmpty()) { //TODO adapter observer for empty view
+                groupEmptyView.visibility = View.VISIBLE
+            } else {
+                groupEmptyView.visibility = View.GONE
+            }
         }
 
     }

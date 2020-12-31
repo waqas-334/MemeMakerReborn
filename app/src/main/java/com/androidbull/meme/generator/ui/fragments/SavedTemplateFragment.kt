@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.*
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,7 +29,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SavedTemplateFragment : Fragment(), OnSavedMemeItemClickListener, ActionMode.Callback {
 
-    private lateinit var tvEmpty: TextView
+    private lateinit var groupEmptyView: Group
     private lateinit var fabSelection: FloatingActionButton
     private lateinit var rvSavedTemplates: RecyclerView
     private var selectAll = false
@@ -89,10 +90,10 @@ class SavedTemplateFragment : Fragment(), OnSavedMemeItemClickListener, ActionMo
         savedTemplateAdapter.updateAdapter(savedTemplates)
 
         if (savedTemplates.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
+            groupEmptyView.visibility = View.VISIBLE
             fabSelection.visibility = View.GONE
         } else {
-            tvEmpty.visibility = View.GONE
+            groupEmptyView.visibility = View.GONE
             fabSelection.visibility = View.VISIBLE
         }
     }
@@ -110,7 +111,7 @@ class SavedTemplateFragment : Fragment(), OnSavedMemeItemClickListener, ActionMo
 
     private fun initUi(view: View) {
         rvSavedTemplates = view.findViewById(R.id.rvSavedTemplates)
-        tvEmpty = view.findViewById(R.id.tvEmpty)
+        groupEmptyView = view.findViewById(R.id.groupEmptyView)
         fabSelection = view.findViewById(R.id.fabSelection)
 
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,7 +27,7 @@ import kotlinx.coroutines.launch
 class NewMemesFragment : Fragment(), OnMemeItemClickListener {
 
     private lateinit var rvMeme: RecyclerView
-    private lateinit var tvEmpty: TextView
+    private lateinit var groupEmptyView: Group
 
     private var newMemes = mutableListOf<Meme2>()
     private val memeRepository = RoomMemeRepository()
@@ -67,10 +68,10 @@ class NewMemesFragment : Fragment(), OnMemeItemClickListener {
         }
         newMemes.reverse()
         memeAdapter.updateAdapter(newMemes)
-        if (memes.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
+        if (newMemes.isEmpty()) {
+            groupEmptyView.visibility = View.VISIBLE
         } else {
-            tvEmpty.visibility = View.GONE
+            groupEmptyView.visibility = View.GONE
         }
     }
 
@@ -116,12 +117,12 @@ class NewMemesFragment : Fragment(), OnMemeItemClickListener {
 
     private fun initUi(view: View) {
         rvMeme = view.findViewById(R.id.rvMeme)
-        tvEmpty = view.findViewById(R.id.tvEmpty)
+        groupEmptyView = view.findViewById(R.id.groupEmptyView)
 
         if (newMemes.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
+            groupEmptyView.visibility = View.VISIBLE
         } else {
-            tvEmpty.visibility = View.GONE
+            groupEmptyView.visibility = View.GONE
         }
     }
 

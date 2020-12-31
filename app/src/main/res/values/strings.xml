@@ -151,6 +151,9 @@
     <string name="str_tweet_about_us">Tweet about us!</string>
     <string name="str_post_on_facebook">Post on Facebook</string>
     <string name="str_is_amazing">is amazing</string>
+    <string name="str_no_saved_memes">No Saved Memes</string>
+    <string name="str_no_saved_templates">No Saved Templates</string>
+    <string name="str_no_new_memes">No New Memes</string>
 
 
 </resources>

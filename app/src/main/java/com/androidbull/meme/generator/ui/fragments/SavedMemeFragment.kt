@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -31,7 +32,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class SavedMemeFragment : Fragment(), OnSavedMemeItemClickListener, ActionMode.Callback {
 
     private val STORAGE_PERMISSION_REQUEST_FOR_DELETION = 789
-    private lateinit var ivEmpty: ImageView
+    private lateinit var groupEmptyView: Group
     private lateinit var fabSelection: FloatingActionButton
     private lateinit var rvSavedMemes: RecyclerView
 
@@ -89,10 +90,10 @@ class SavedMemeFragment : Fragment(), OnSavedMemeItemClickListener, ActionMode.C
         updateAdapter()
 
         if (memes.isEmpty()) {
-            ivEmpty.visibility = View.VISIBLE
+            groupEmptyView.visibility = View.VISIBLE
             fabSelection.visibility = View.GONE
         } else {
-            ivEmpty.visibility = View.GONE
+            groupEmptyView.visibility = View.GONE
             fabSelection.visibility = View.VISIBLE
         }
     }
@@ -105,7 +106,7 @@ class SavedMemeFragment : Fragment(), OnSavedMemeItemClickListener, ActionMode.C
 
     private fun initUi(view: View) {
         rvSavedMemes = view.findViewById(R.id.rvSavedMemes)
-        ivEmpty = view.findViewById(R.id.tvEmpty)
+        groupEmptyView = view.findViewById(R.id.groupEmptyView)
         fabSelection = view.findViewById(R.id.fabSelection)
     }
 

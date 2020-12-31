@@ -5,17 +5,28 @@
     android:layout_height="match_parent"
     android:background="?colorSurface">
 
-    <TextView
-        android:id="@+id/tvEmpty"
+    <ImageView
+        android:id="@+id/ivEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/str_loading_please_wait"
-        android:textSize="18sp"
+        android:contentDescription="@string/cd_todo"
+        android:src="@drawable/ic_empty_illustration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="No New Memes"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivEmpty" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMeme"
@@ -26,5 +37,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupEmptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tvEmpty,ivEmpty" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
