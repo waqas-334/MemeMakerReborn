@@ -6,6 +6,15 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btnCamera"
+        style="?borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:text="@string/str_camera"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/btnGallery"
         style="?borderlessButtonStyle"
         android:layout_width="match_parent"
@@ -14,13 +23,5 @@
         android:text="@string/str_gallery_amp_other_sources"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btnCamera"
-        style="?borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical"
-        android:text="@string/str_camera"
-        android:textAllCaps="false" />
 
 </LinearLayout>

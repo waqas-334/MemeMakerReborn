@@ -1288,7 +1288,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                                 it.dismissWithAnimation()
                             }
                         }
-                    }, 15000)
+                    }, 1500)
 
                     if (!TextUtils.isEmpty(imagePath)) {
                         val tempFile = File(imagePath)
