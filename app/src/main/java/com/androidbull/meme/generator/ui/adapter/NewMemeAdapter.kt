@@ -15,6 +15,7 @@ import com.androidbull.meme.generator.helper.MEME_SERVER_BASE_URL
 import com.androidbull.meme.generator.model.Meme2
 import com.androidbull.meme.generator.ui.interfaces.OnMemeItemClickListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 import xyz.hanks.library.bang.SmallBangView

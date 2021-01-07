@@ -147,7 +147,7 @@ class FavouriteMemeAdapter(
             cibAddToFavourites.isChecked = meme.isFavourite
             sbvFavourite.isSelected = meme.isFavourite
 
-            if (meme.id < 2000) // default meme
+            if (meme.id < 1600) // default meme
             {
                 val urlSplits = meme.imageName.split(".jpg").toTypedArray()
                 val fileName = urlSplits[0] + "_s.jpg"  // append '_s' at the end for thumbnails
