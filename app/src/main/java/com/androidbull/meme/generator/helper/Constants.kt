@@ -4,6 +4,9 @@ import android.Manifest
 
 const val APP_NAME = "Meme Maker"
 
+const val TOTAL_DEFAULT_MEMES = 1600
+
+
 const val FILE_PROVIDER_AUTHORITY = "com.androidbull.meme.generator.fileprovider"
 
 const val MEMES_ASSET_FOLDER_NAME = "memes/"

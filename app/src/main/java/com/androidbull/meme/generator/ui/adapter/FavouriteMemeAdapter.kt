@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androidbull.meme.generator.R
-import com.androidbull.meme.generator.helper.AppContext
-import com.androidbull.meme.generator.helper.CheckableImageButton
-import com.androidbull.meme.generator.helper.MEMES_ASSET_FOLDER_NAME
-import com.androidbull.meme.generator.helper.MEME_SERVER_BASE_URL
+import com.androidbull.meme.generator.helper.*
 import com.androidbull.meme.generator.model.Meme2
 import com.androidbull.meme.generator.ui.interfaces.OnMemeItemClickListener
 import com.bumptech.glide.Glide
@@ -147,7 +144,7 @@ class FavouriteMemeAdapter(
             cibAddToFavourites.isChecked = meme.isFavourite
             sbvFavourite.isSelected = meme.isFavourite
 
-            if (meme.id < 1600) // default meme
+            if (meme.id < TOTAL_DEFAULT_MEMES) // default meme
             {
                 val urlSplits = meme.imageName.split(".jpg").toTypedArray()
                 val fileName = urlSplits[0] + "_s.jpg"  // append '_s' at the end for thumbnails

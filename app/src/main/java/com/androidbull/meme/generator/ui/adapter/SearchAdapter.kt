@@ -13,10 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.androidbull.meme.generator.R
-import com.androidbull.meme.generator.helper.CheckableImageButton
-import com.androidbull.meme.generator.helper.MEME_SERVER_BASE_URL
-import com.androidbull.meme.generator.helper.SearchHelper
-import com.androidbull.meme.generator.helper.StorageHelper
+import com.androidbull.meme.generator.helper.*
 import com.androidbull.meme.generator.model.Meme2
 import com.androidbull.meme.generator.ui.interfaces.OnMemeItemClickListener
 import com.bumptech.glide.Glide
@@ -146,7 +143,7 @@ class SearchAdapter(
                         ivMeme.setImageBitmap(bitmap)
                     }
                 }
-            } else if (meme.id < 2000) { // default meme
+            } else if (meme.id < TOTAL_DEFAULT_MEMES) { // default meme
 
                 val assetManager: AssetManager = itemView.context.assets
                 try {
