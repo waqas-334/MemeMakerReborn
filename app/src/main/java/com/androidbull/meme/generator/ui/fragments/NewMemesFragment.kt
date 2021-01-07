@@ -63,7 +63,7 @@ class NewMemesFragment : Fragment(), OnMemeItemClickListener {
     private fun onMemesFetched(memes: List<Meme2>) {
         newMemes.clear()
         memes.forEach { meme ->
-            if (meme.id > 2000 && !meme.isCreatedByUser)     //TODO logic to detect new Meme
+            if (meme.id > 1600 && !meme.isCreatedByUser)     //TODO logic to detect new Meme
                 newMemes.add(meme)
         }
         newMemes.reverse()

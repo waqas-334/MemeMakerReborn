@@ -94,7 +94,7 @@ class CaptionSettingsDialog : DialogFragment() {
 
 //        seekBarFontSize.tickCount = fontSizeList.size // set this in xml
 
-        seekBarFontSize.customTickTexts(getFontSizeIndicatorTextList())
+        context?.let { seekBarFontSize.customTickTexts(getFontSizeIndicatorTextList(it)) }
         seekBarFontSize.setIndicatorTextFormat("\${TICK_TEXT}")
         seekBarFontSize.min = 1f
         seekBarFontSize.max = seekBarFontSize.tickCount.toFloat()
@@ -123,7 +123,8 @@ class CaptionSettingsDialog : DialogFragment() {
         }
 
 
-        fontSizeTickPosition = getTickPositionFromFontSize(captionSetting.fontSize)
+        fontSizeTickPosition =
+            getTickPositionFromFontSize(captionSetting.fontSize, requireContext())
         seekBarFontSize.setProgress(fontSizeTickPosition)
         seekBarOutlineSize.setProgress(getTickPositionFromOutlineSize(captionSetting.strokeWidth))
         seekBarMaxLines.setProgress(getTickPositionFromMaxLines(captionSetting.maxLines))
@@ -133,9 +134,13 @@ class CaptionSettingsDialog : DialogFragment() {
     private fun initActions() {
         btnOk.setOnClickListener {
             val newTickPosition =
-                getTickPositionFromFontSize(getFontSizeFromSeekBar(seekBarFontSize.progress))
+                getTickPositionFromFontSize(
+                    getFontSizeFromSeekBar(seekBarFontSize.progress, requireContext()),
+                    requireContext()
+                )
             if (newTickPosition != fontSizeTickPosition) {
-                captionSetting.fontSize = getFontSizeFromSeekBar(seekBarFontSize.progress)
+                captionSetting.fontSize =
+                    getFontSizeFromSeekBar(seekBarFontSize.progress, requireContext())
             }
             captionSetting.strokeWidth =
                 getOutlineSizeFromSeekBar(seekBarOutlineSize.progress)

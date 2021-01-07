@@ -126,6 +126,15 @@
     <string name="str_is_amazing">is amazing</string>
     <string name="str_no_saved_memes">No Saved Memes</string>
     <string name="str_no_saved_templates">No Saved Templates</string>
+    <string name="str_tiny">Tiny</string>
+    <string name="str_tiny_plus">Tiny+</string>
+    <string name="str_small">Small</string>
+    <string name="str_small_plus">Small+</string>
+    <string name="str_normal">Normal</string>
+    <string name="str_normal_plus">Normal+</string>
+    <string name="str_large">Large</string>
+    <string name="str_large_plus">Large+</string>
+    <string name="str_huge">Huge</string>
 
 
 </resources>

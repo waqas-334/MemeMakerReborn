@@ -159,7 +159,6 @@ class ParentMemeFragment : Fragment(), TabLayout.OnTabSelectedListener {
     }
 
     private fun setPagerAdapter() {
-
         pagerAdapter = MainPagerAdapter(this, fragments)
         viewPagerMain.adapter = pagerAdapter
     }

@@ -1,39 +1,44 @@
 package com.androidbull.meme.generator.helper
 
+import android.content.Context
+import com.androidbull.meme.generator.R
 import com.androidbull.meme.generator.ui.SeekBarIndicator
 
 
-private val fontSizeIndicatorList =
-    listOf(
-        SeekBarIndicator(12, "Tiny"),
-        SeekBarIndicator(14, "Tiny+"),
-        SeekBarIndicator(16, "Small"),
-        SeekBarIndicator(18, "Small+"),
-        SeekBarIndicator(24, "Normal"),
-        SeekBarIndicator(30, "Normal+"),
-        SeekBarIndicator(40, "Large"),
-        SeekBarIndicator(50, "Large+"),
-        SeekBarIndicator(60, "Huge"),
+private fun getFontSizeIndicatorList(context: Context): List<SeekBarIndicator> {
+    context.getString(R.string.cd_todo)
+    return listOf(
+        SeekBarIndicator(12, context.getString(R.string.str_tiny)),
+        SeekBarIndicator(14, context.getString(R.string.str_tiny_plus)),
+        SeekBarIndicator(16, context.getString(R.string.str_small)),
+        SeekBarIndicator(18, context.getString(R.string.str_small_plus)),
+        SeekBarIndicator(24, context.getString(R.string.str_normal)),
+        SeekBarIndicator(30, context.getString(R.string.str_normal_plus)),
+        SeekBarIndicator(40, context.getString(R.string.str_large)),
+        SeekBarIndicator(50, context.getString(R.string.str_large_plus)),
+        SeekBarIndicator(60, context.getString(R.string.str_huge)),
     )
+}
 
-fun getFontSizeIndicatorTextList(): Array<String> {
+
+fun getFontSizeIndicatorTextList(context: Context): Array<String> {
     val fontSizeIndicatorTextList: MutableList<String> = mutableListOf()
-    fontSizeIndicatorList.forEach {
+    getFontSizeIndicatorList(context).forEach {
         fontSizeIndicatorTextList.add(it.text)
     }
     return fontSizeIndicatorTextList.toTypedArray()
 }
 
-fun getFontSizeFromSeekBar(tickIndex: Int): Int {
-    return if (tickIndex <= fontSizeIndicatorList.size)
-        fontSizeIndicatorList[(tickIndex - 1)].value
+fun getFontSizeFromSeekBar(tickIndex: Int, context: Context): Int {
+    return if (tickIndex <= getFontSizeIndicatorList(context).size)
+        getFontSizeIndicatorList(context)[(tickIndex - 1)].value
     else
         40 // Large
 }
 
-fun getTickPositionFromFontSize(fontSize: Int): Float {
+fun getTickPositionFromFontSize(fontSize: Int, context: Context): Float {
     val intArrayList: MutableList<Int> = mutableListOf()
-    fontSizeIndicatorList.forEachIndexed { index, seekBarIndicator ->
+    getFontSizeIndicatorList(context).forEachIndexed { index, seekBarIndicator ->
         intArrayList.add(seekBarIndicator.value)
     }
     return getClosestIndex(intArrayList.toIntArray(), fontSize).toFloat()
@@ -53,7 +58,7 @@ private fun getClosestIndex(values: IntArray, value: Int): Int {
             closest.dif = dif
         }
     }
-    return (closest.index +1)
+    return (closest.index + 1)
 }
 
 
