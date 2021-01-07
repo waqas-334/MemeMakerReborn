@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Meme Maker</string>
     <string name="meme_generator_activity_name">Meme Generator</string>
     <string name="str_memes">Memes</string>
     <string name="str_saved_memes">Saved Memes</string>
@@ -8,12 +7,7 @@
     <string name="str_more_apps">More Apps</string>
     <string name="str_rate_app">Rate App</string>
     <string name="str_about">About</string>
-    <string name="str_email">Email</string>
-    <string name="str_follow_us">Follow us</string>
-    <string name="cd_todo">todo</string>
-    <string name="drawer_opened">drawer opened</string>
-    <string name="drawer_closed">drawer closed</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="str_save_meme_to_share">Please save meme to share</string>
     <string name="str_share_meme">Share Meme</string>
     <string name="str_add_text">+ Add Text</string>
@@ -24,26 +18,17 @@
     <string name="str_outline_color">Outline Color</string>
     <string name="str_cancel">Cancel</string>
     <string name="str_select">Select</string>
-    <string name="str_added_to_favourites">Added To Favourites</string>
-    <string name="str_removed_from_favourites">Removed From Favourites</string>
     <string name="str_undo">Undo</string>
     <string name="str_downloading_meme">Downloading meme…</string>
-    <string name="str_please_wait">Please wait</string>
     <string name="str_please_wait_">Please wait…</string>
     <string name="str_default_caption">TAP HERE TO ADD TEXT</string>
     <string name="str_custom_meme">Custom Meme</string>
     <string name="str_save_to_device">Save To Device</string>
     <string name="str_save_as_editable_template">Save As Editable Template</string>
-    <string name="str_meme_saved_successfully">Meme Saved Successfully</string>
-    <string name="str_failed_to_save_meme">Failed To Save Meme</string>
     <string name="str_saved_templates">Saved Templates</string>
-    <string name="str_communicate">Communicate</string>
     <string name="str_file_already_exist">File already exist</string>
-    <string name="str_problem_loading_meme">Problem loading meme</string>
     <string name="str_camera">Camera</string>
-    <string name="str_gallery_amp_other_sources"><![CDATA[Gallery & other sources]]></string>
-    <string name="str_delete">Delete</string>
-    <string name="str_select_all">Select All</string>
+    <string name="str_gallery_amp_other_sources">Gallery</string>
 
     <string name="str_storage_permission_denied">Storage Permissions Denied. Memes cannot be saved. Allow storage permissions from settings</string>
     <string name="str_storage_permission_denied_for_custom_fonts">Storage Permissions Denied. Custom Font cannot be loaded. Allow storage permissions from settings</string>
@@ -74,11 +59,9 @@
     <string name="exit_dilaog_message">Are you sure you want to exit?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
-    <string name="dont_show_this_dialog_again">Don\'t show this again</string>
     <string name="str_text_size">Text Size</string>
     <string name="str_outline_size">Outline Size</string>
     <string name="str_max_lines">Max Lines</string>
-    <string name="str_ok">OK</string>
     <string name="str_crop">Crop</string>
     <string name="str_contact_us">Contact us</string>
     <string name="str_privacy_policy">Privacy Policy</string>
@@ -92,18 +75,14 @@
     <string name="str_hide_status_bar">Hide status bar</string>
     <string name="str_dark_mode">Dark Mode</string>
     <string name="str_save_battery_by_enabling_the_dark_mode">Save battery by enabling the dark mode</string>
-    <string name="str_check_how_this_app_concerns">Check how this app concerns</string>
     <string name="str_font">Font</string>
     <string name="str_no_products_found">No Products Found</string>
-    <string name="str_purchase">Purchase</string>
-    <string name="str_payable_amount">Payable Amount: </string>
     <string name="str_all_memes">All</string>
     <string name="str_favourite">Favourite</string>
     <string name="str_random">Random</string>
     <string name="str_saving">Saving…</string>
     <string name="str_saved">Saved</string>
     <string name="str_sorry_try_again">Sorry, try again</string>
-    <string name="str_empty">Empty</string>
     <string name="str_failed_to_save_image">Failed to save Image</string>
     <string name="str_delete_confirmation">Are you sure you want to delete?</string>
     <string name="str_deleting">Deleting…</string>
@@ -118,13 +97,8 @@
     <string name="str_something_went_wrong">Something went wrong</string>
     <string name="str_retry">Retry</string>
     <string name="str_leave">Leave</string>
-    <string name="str_enter_valid_name">Please Enter Valid Meme Name</string>
-    <string name="str_uploading">Uploading meme…</string>
-    <string name="str_uploaded_successfully">Uploaded successfully</string>
-    <string name="str_new_memes_updated">New Memes Updated</string>
     <string name="str_purchase_successful">Purchase Successful</string>
     <string name="str_ad_free_experience">Ad-free experience</string>
-    <string name="str_go_premium">GO PREMIUM</string>
     <string name="str_go_premium_">Go Premium</string>
     <string name="str_priority_updates">Priority updates</string>
     <string name="str_support_the_developer">Support the developer</string>
@@ -136,7 +110,6 @@
     <string name="str_check_playstore_login">. Check PlayStore login.</string>
     <string name="choose_one">Choose one</string>
     <string name="share_app_message">Grab this amazing and easy to use Meme Maker, here: </string>
-    <string name="str_no_memes">No memes</string>
     <string name="str_how_you_feel_about_this_app">How you feel about this App?</string>
     <string name="str_happy">Happy</string>
     <string name="str_confused">Confused</string>
@@ -153,7 +126,6 @@
     <string name="str_is_amazing">is amazing</string>
     <string name="str_no_saved_memes">No Saved Memes</string>
     <string name="str_no_saved_templates">No Saved Templates</string>
-    <string name="str_no_new_memes">No New Memes</string>
 
 
 </resources>

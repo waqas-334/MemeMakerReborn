@@ -34,7 +34,7 @@ class PurchaseActivity : BaseActivity(), PurchasesUpdatedListener {
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)
-        progressDialog.setTitle(getString(R.string.str_please_wait))
+        progressDialog.setTitle(getString(R.string.str_please_wait_))
 
         btnPurchase.setOnClickListener {
             progressDialog.show()
