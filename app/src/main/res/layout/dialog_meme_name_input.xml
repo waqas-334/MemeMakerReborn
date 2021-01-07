@@ -11,7 +11,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Enter Meme Name"
+        android:text="@string/str_enter_meme_name"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
