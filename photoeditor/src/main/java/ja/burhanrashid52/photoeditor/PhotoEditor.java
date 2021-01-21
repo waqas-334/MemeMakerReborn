@@ -1306,7 +1306,6 @@ public class PhotoEditor implements BrushViewChangeListener {
      * @see OnSaveListener
      */
     @SuppressLint("StaticFieldLeak")
-    @RequiresPermission(allOf = {Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void saveAsTemplate(@NonNull final String imagePath,
                                @NonNull final OnSaveListener onSaveListener) {
         Log.d(TAG, "Image Path: " + imagePath);
@@ -1319,7 +1318,6 @@ public class PhotoEditor implements BrushViewChangeListener {
                 parentView.setDrawingCacheEnabled(false);
             }
 
-            @SuppressLint("MissingPermission")
             @Override
             protected Exception doInBackground(String... strings) {
                 // Create a media file name

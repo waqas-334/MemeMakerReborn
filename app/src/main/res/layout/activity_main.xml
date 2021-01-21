@@ -20,6 +20,7 @@
             app:navigationIcon="@drawable/ic_baseline_menu_24"
             app:titleTextColor="@color/white" />
 
+
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"

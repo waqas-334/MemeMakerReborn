@@ -75,7 +75,7 @@ dependencies {
     implementation project(':smallbang')
 
     implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.1'
 //    implementation 'cat.ereza:customactivityoncrash:2.3.0'
     implementation "androidx.tonyodev.fetch2:xfetch2:3.1.5"
     implementation "com.squareup.okhttp3:okhttp:4.9.0"

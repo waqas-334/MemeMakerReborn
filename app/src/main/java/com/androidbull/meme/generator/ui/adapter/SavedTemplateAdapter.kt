@@ -80,7 +80,14 @@ class SavedTemplateAdapter(
             itemView.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    onSavedMemeItemClickListener.onMemeClicked(memes[position], position)
+                    if (showSelectionUi) {
+                        cibSelectMeme.isChecked = !cibSelectMeme.isChecked  // isFavourite is acting as isSelected
+                        onSavedMemeItemClickListener.onMemeSelected(
+                            memes[position], position, cibSelectMeme.isChecked
+                        )
+                    } else {
+                        onSavedMemeItemClickListener.onMemeClicked(memes[position], position)
+                    }
                 }
             }
 

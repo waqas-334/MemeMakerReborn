@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -186,7 +185,7 @@ open class FavouriteMemeFragment : Fragment(), OnMemeItemClickListener {
 
         activity?.let {
             if (it is MainActivity) {
-                it.updateToolbarIcons(listIcon, false)
+                it.updateToolBarIcons(listIcon, false)
             }
         }
 

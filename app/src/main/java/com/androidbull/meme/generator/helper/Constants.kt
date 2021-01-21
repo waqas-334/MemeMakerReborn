@@ -32,7 +32,7 @@ const val SUPPORTED_FONT_EXTENSION_1 = ".ttf"
 const val SUPPORTED_FONT_EXTENSION_2 = ".otf"
 
 const val PREF_RECENTLY_USED_COLORS = "preference_recently_used_colors"
-const val PREF_FILE_KEY = "preference_file_key"
+const val PREF_FILE_KEY = "meme_maker_preferences"
 const val PREF_CAPTION_SETTINGS = "pref_caption_settings"
 const val PREF_ALL_MEMES_LAYOUT_MANAGER_TYPE = "all_memes_layout_manager_type"
 const val PREF_FAV_MEMES_LAYOUT_MANAGER_TYPE = "fav_memes_layout_manager_type"
@@ -72,7 +72,7 @@ val STORAGE_PERMISSIONS = arrayOf(
     Manifest.permission.READ_EXTERNAL_STORAGE
 )
 
-const val ADS_TEST_ID = "e618e644-20f8-48fb-b5cc-225ecea94362"
+const val ADS_TEST_ID = "a9ccb953-a80b-4491-b6b5-1c34d6967757"
 
 const val ADS_TEST_PRODUCT_ID_PURCHASED = "android.test.purchased"
 const val ADS_TEST_PRODUCT_ID_CANCELLED = "android.test.canceled"

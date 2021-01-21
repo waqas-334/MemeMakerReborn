@@ -15,10 +15,10 @@ interface IMemeRepository {
     fun deleteMeme(memeId: Long)
     fun deleteMemes(memes: List<Meme2>)
 
-    fun getMemeById(memeId: Long): Meme2
+    fun getMemeById(memeId: Long): Meme2?
     fun getLastMemeId(): Long
-    fun getMemeWithSearchTags(memeId: Long): Meme2
-    fun getMemeWithCaptionSets(memeId: Long): Meme2
+    fun getMemeWithSearchTags(memeId: Long): Meme2?
+    fun getMemeWithCaptionSets(memeId: Long): Meme2?
 
     fun getAllMemes(): MutableList<Meme2>
     fun getAllMemesWithSearchTags(): MutableList<Meme2>

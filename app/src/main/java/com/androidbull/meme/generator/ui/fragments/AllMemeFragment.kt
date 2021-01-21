@@ -164,7 +164,7 @@ class AllMemeFragment : Fragment(), OnMemeItemClickListener {
 
         activity?.let {
             if (it is MainActivity) {
-                it.updateToolbarIcons(listIcon, false)
+                it.updateToolBarIcons(listIcon, false)
             }
         }
 
