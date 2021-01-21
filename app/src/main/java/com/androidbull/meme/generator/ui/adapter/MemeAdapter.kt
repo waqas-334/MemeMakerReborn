@@ -139,8 +139,7 @@ class MemeAdapter(
 
         fun bind(meme: Meme2) {
 
-//            tvMemeName.text = meme.imageName
-
+            tvMemeName.text = meme.imageName
             cibAddToFavourites.isChecked = meme.isFavourite
             sbvFavourite.isSelected = meme.isFavourite
 

@@ -2,15 +2,16 @@ package com.androidbull.meme.generator.ui.activities
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.androidbull.meme.generator.R
 import com.androidbull.meme.generator.data.repository.RoomFontRepository
 import com.androidbull.meme.generator.helper.*
@@ -31,6 +32,7 @@ class CustomFontActivity : BaseActivity(), OnCustomFontItemClickListener {
     private var customFonts = mutableListOf<CaptionFont>()
     private lateinit var eFabCustomFont: ExtendedFloatingActionButton
     private val fontRepository = RoomFontRepository()
+    private lateinit var groupEmptyView: Group
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class CustomFontActivity : BaseActivity(), OnCustomFontItemClickListener {
         tbCustomFont = findViewById(R.id.tbCustomFont)
         eFabCustomFont = findViewById(R.id.eFabCustomFont)
         rvCustomFont = findViewById(R.id.rvCustomFont)
+        groupEmptyView = findViewById(R.id.groupEmptyView)
     }
 
     private fun initActions() {
@@ -59,42 +62,6 @@ class CustomFontActivity : BaseActivity(), OnCustomFontItemClickListener {
 
     private fun getCustomFonts() = fontRepository.getCustomFonts()
 
-    /* private fun getCustomFonts(): MutableList<CaptionFont> {
-         val tempCustomFonts = mutableListOf<CaptionFont>()
-         try {
-             if (StorageHelper.isExternalStorageReadable()) {
-                 val fontsPrivateDir = File(StorageHelper.getFontsPrivateDir())
-                 if (fontsPrivateDir.exists() && fontsPrivateDir.isDirectory) {
-
-                     fontsPrivateDir.listFiles()?.let { fontList ->
-                         if (fontList.isNotEmpty()) {
-                             fontList.forEach { fontFile ->
-                                 val customFont =
-                                     CaptionFont(
-                                         System.currentTimeMillis(),
-                                         fontFile.name,
-                                         fontFile.nameWithoutExtension,
-                                         isAppProvidedFont = false
-                                     )
-                                 tempCustomFonts.add(customFont)
-                             }
-                         }
-                     }
-                 }
-             } else {
-                 Toast.makeText(
-                     this,
-                     getString(R.string.str_external_storage_busy),
-                     Toast.LENGTH_SHORT
-                 )
-                     .show()
-             }
-         } catch (np: NullPointerException) {
-             np.printStackTrace()
-         } finally {
-             return tempCustomFonts
-         }
-     }*/
 
     private fun initToolbar() {
         setSupportActionBar(tbCustomFont)
@@ -105,6 +72,41 @@ class CustomFontActivity : BaseActivity(), OnCustomFontItemClickListener {
 
     private fun initCustomFontAdapter() {
         customFontAdapter = CustomFontAdapter(customFonts, this@CustomFontActivity)
+        customFontAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                checkEmptyView()
+            }
+
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                checkEmptyView()
+            }
+
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                super.onItemRangeRemoved(positionStart, itemCount)
+                checkEmptyView()
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                super.onItemRangeChanged(positionStart, itemCount)
+                checkEmptyView()
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
+                super.onItemRangeChanged(positionStart, itemCount, payload)
+                checkEmptyView()
+            }
+
+            override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                super.onItemRangeMoved(fromPosition, toPosition, itemCount)
+                checkEmptyView()
+            }
+        })
+    }
+
+    private fun checkEmptyView() {
+        groupEmptyView.visibility = if (customFontAdapter.itemCount == 0) View.VISIBLE else View.GONE
     }
 
     private fun initCustomFontRecyclerView() {
@@ -170,39 +172,37 @@ class CustomFontActivity : BaseActivity(), OnCustomFontItemClickListener {
         try {
             if (requestCode == REQUEST_DOCUMENT_PROVIDER && resultCode == RESULT_OK) {
                 data?.data?.let { uri ->
-
-//                    if (hasPermissions(*STORAGE_PERMISSIONS, context = this)
-//                    ) {
-                        val fileExtension = FileUtils.getExtension(uri.path)
-                        if (!TextUtils.isEmpty(fileExtension) && (fileExtension.equals(
-                                SUPPORTED_FONT_EXTENSION_1,
-                                true
-                            ) || fileExtension.equals(
-                                SUPPORTED_FONT_EXTENSION_2,
-                                true
-                            ))
-                        ) {
-                            saveCustomFont(uri)
-                        } else {
-                            Toast.makeText(
-                                this,
-                                getString(R.string.str_not_valid_font_file),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-//                    } else {
-//                        ActivityCompat.requestPermissions(
-//                            this,
-//                            STORAGE_PERMISSIONS,
-//                            STORAGE_PERMISSION_REQUEST
-//                        )
-//                    }
+                    if (isValidFontFile(uri)) {
+                        saveCustomFont(uri)
+                    } else {
+                        Toast.makeText(
+                            this,
+                            getString(R.string.str_not_valid_font_file),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
         } finally {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun isValidFontFile(uri: Uri): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            val fileExtension = FileUtils.getExtension(uri.path)
+            return !TextUtils.isEmpty(fileExtension) && (fileExtension.equals(
+                SUPPORTED_FONT_EXTENSION_1,
+                true
+            ) || fileExtension.equals(
+                SUPPORTED_FONT_EXTENSION_2,
+                true
+            ))
+        } else {
+            val mimeType = contentResolver.getType(uri)
+            return mimeType != null && mimeType.contains("font", true)
         }
     }
 
@@ -259,38 +259,5 @@ class CustomFontActivity : BaseActivity(), OnCustomFontItemClickListener {
             Toast.makeText(this, getString(R.string.something_went_wrong), Toast.LENGTH_LONG)
                 .show()
         }
-
     }
-
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
-    ) {
-        when (requestCode) {
-            STORAGE_PERMISSION_REQUEST -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                ) {
-                    if (!ActivityCompat.shouldShowRequestPermissionRationale(
-                            this,
-                            STORAGE_PERMISSIONS[0]
-                        )
-                    ) {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.str_storage_permission_denied_for_custom_fonts),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.str_storage_permission_required_for_storage),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
-    }
-
 }

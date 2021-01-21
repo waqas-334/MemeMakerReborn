@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
-import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -245,7 +244,7 @@ class SavedTemplateFragment : Fragment(), OnSavedMemeItemClickListener, ActionMo
 
         activity?.let {
             if (it is MainActivity) {
-                it.updateToolbarIcons(listIcon, false)
+                it.updateToolBarIcons(listIcon, shuffleIconVisibility = false,searchIconVisibility = false)
             }
         }
 

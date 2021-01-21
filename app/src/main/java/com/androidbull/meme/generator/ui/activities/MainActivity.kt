@@ -42,6 +42,7 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     private var memeRepository = RoomMemeRepository()
     private var mainMenu: Menu? = null
     private var shuffleIconVisibility = false
+    private var searchIconVisibility = false
 
     private lateinit var bannerAdContainer: ViewGroup
 
@@ -64,7 +65,6 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         initActions()
         initToolbar()
         initDrawer()
-        checkPermissions()
         addInitialFragment()
         setUpAppLaunchCounter()
 
@@ -141,6 +141,12 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         setSupportActionBar(tbMain)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+    }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
 
@@ -229,10 +235,6 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         transaction.commit()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
-    }
 
     private fun closeDrawer() {
         if (drawerMain.isDrawerOpen(GravityCompat.START)) {
@@ -246,17 +248,6 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         super.onBackPressed()
     }
 
-
-    private fun checkPermissions() {
-        /* if (Build.VERSION.SDK_INT < 29) {
-             val readPermission = arrayOf(
-                 Manifest.permission.READ_EXTERNAL_STORAGE
-             )
-             if (!hasPermissions(*permissions)) {
-                 ActivityCompat.requestPermissions(this, permissions, 788)
-             }
-         }*/
-    }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
@@ -273,6 +264,7 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
             menu?.findItem(R.id.mi_list)?.icon = it
         }
         menu?.findItem(R.id.mi_shuffle)?.isVisible = shuffleIconVisibility
+        menu?.findItem(R.id.mi_search)?.isVisible = searchIconVisibility
 
         return super.onPrepareOptionsMenu(menu)
     }
@@ -320,22 +312,11 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         }
     }
 
-    fun setMenuItemsVisibility(visible: Boolean, exception: MenuItem?) {
-        mainMenu?.let { menu ->
-            for (i in 0 until menu.size()) {
-                val item = menu.getItem(i)
-                if (item != exception)
-                    item.isVisible = visible
-            }
-        }
-    }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true
         }
-
         when (item.itemId) {
             R.id.mi_list -> {
 
@@ -381,17 +362,29 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         return super.onOptionsItemSelected(item)
     }
 
-    fun updateToolbarIcons(listIcon: Drawable?, shuffleIconVisibility: Boolean) {
+    fun setMenuItemsVisibility(visible: Boolean, exception: MenuItem?) {
+        mainMenu?.let { menu ->
+            for (i in 0 until menu.size()) {
+                val item = menu.getItem(i)
+                if (item != exception)
+                    item.isVisible = visible
+            }
+        }
+    }
+
+
+    fun updateToolBarIcons(
+        listIcon: Drawable?,
+        shuffleIconVisibility: Boolean,
+        searchIconVisibility: Boolean = true
+    ) {
         listIcon?.let {
             this.listIcon = it
         }
         this.shuffleIconVisibility = shuffleIconVisibility
+        this.searchIconVisibility = searchIconVisibility
         invalidateOptionsMenu()
 
-    }
-
-    private fun hasPermissions(vararg permissions: String): Boolean = permissions.all {
-        ActivityCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
 
 

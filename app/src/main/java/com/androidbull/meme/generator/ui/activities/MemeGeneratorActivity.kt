@@ -234,13 +234,18 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             adId = MEME_GEN_ACTIVITY_BANNER_AD_ID,
             adContainer = bannerAdContainer
         )
+        loadInterstitialAd()
+    }
 
-//        AdSettings.addTestDevice(ADS_TEST_ID)
+    override fun onPremiumMemberShipAcquired() {
+        AdsManager.removeAds()
+    }
 
+    private fun loadInterstitialAd() {
+        AdSettings.addTestDevice(ADS_TEST_ID)
         interstitialAd = InterstitialAd(this, MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID)
         val interstitialAdListener = object : InterstitialAdListener {
             override fun onAdClicked(ad: Ad?) {
-                Log.d(TAG, "onAdClicked: ")
             }
 
             override fun onError(ad: Ad?, adError: AdError?) {
@@ -248,19 +253,16 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             }
 
             override fun onAdLoaded(ad: Ad?) {
-                Log.d(TAG, "onAdLoaded: ")
             }
 
             override fun onLoggingImpression(ad: Ad?) {
-                Log.d(TAG, "onLoggingImpression: ")
             }
 
             override fun onInterstitialDisplayed(ad: Ad?) {
-                Log.d(TAG, "onInterstitialDisplayed: ")
             }
 
             override fun onInterstitialDismissed(ad: Ad?) {
-                Log.d(TAG, "onInterstitialDismissed: ")
+                loadInterstitialAd()
             }
         }
 
@@ -273,16 +275,17 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         }
     }
 
-    override fun onPremiumMemberShipAcquired() {
-        AdsManager.removeAds()
-    }
-
-
     private fun showInterstitialAd() {
-        interstitialAd?.let {
-            if (it.isAdLoaded && !it.isAdInvalidated) {
-                it.show()
+        if (interstitialAd != null) {
+            if (!interstitialAd!!.isAdLoaded) {
+                return
+            } else if (interstitialAd!!.isAdInvalidated) {
+                loadInterstitialAd()
+            } else {
+                interstitialAd!!.show()
             }
+        } else {
+            loadInterstitialAd()
         }
     }
 
@@ -345,6 +348,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
                 val saveMemePath = extras.getString("savedMemePath")
                 if (!TextUtils.isEmpty(saveMemePath)) {
+                    mSaveImageUri = Uri.parse(saveMemePath)
                     Glide.with(this)
                         .load(Uri.parse(saveMemePath))
                         .into(photoEditorView.source)
@@ -356,8 +360,9 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
     }
 
     private fun showSomeThingWentWrongDialog() {
-        ErrorDialog.newInstance(getString(R.string.something_went_wrong))
-            .show(supportFragmentManager, FRAGMENT_ERROR_DIALOG_TAG)
+        val errorDialog = ErrorDialog.newInstance(getString(R.string.something_went_wrong))
+        errorDialog.show(supportFragmentManager, FRAGMENT_ERROR_DIALOG_TAG)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -530,9 +535,12 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
 
     private fun loadMemeFromServer(meme: Meme2) {
+        val memeDownloadDialog: MemeDownloadDialog? = MemeDownloadDialog.newInstance()
+
         //TODO dialog fragment
         val retryDialog = MaterialAlertDialogBuilder(this@MemeGeneratorActivity)
             .setMessage(resources.getString(R.string.something_went_wrong))
+            .setCancelable(false)
             .setNegativeButton(resources.getString(R.string.str_leave)) { _, _ ->
                 finish()
             }
@@ -540,7 +548,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                 loadMemeFromServer(meme)
             }.create()
 
-        val memeDownloadDialog : MemeDownloadDialog? = MemeDownloadDialog.newInstance()
 
         if (retryDialog.isShowing)
             retryDialog.dismiss()
@@ -561,7 +568,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                 ): Boolean {
                     if (retryDialog.isShowing)
                         retryDialog.dismiss()
-                        memeDownloadDialog?.dismiss()
+                    memeDownloadDialog?.dismiss()
 
                     photoEditorView.source.viewTreeObserver
                         .addOnGlobalLayoutListener(object :
@@ -589,9 +596,8 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                 ): Boolean {
 
                     e?.printStackTrace()
-                    memeDownloadDialog?.dismiss()
-
                     retryDialog.show()
+                    memeDownloadDialog?.dismiss()
                     return false
                 }
 
@@ -880,7 +886,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         options.setFreeStyleCropEnabled(true)
         options.setToolbarTitle(getString(R.string.str_crop))
 
-        val destinationFileName = "SAMPLE_CROPPED_IMAGE_NAME.png"
+        val destinationFileName = "CROPPED_IMAGE.png"
         val uCrop = UCrop.of(uri, Uri.fromFile(File(cacheDir, destinationFileName)))
 
         uCrop.withOptions(options)
@@ -899,7 +905,11 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             }
 
             override fun onSaveAsTemplateClick() {
-                saveMemeAsTemplate()
+                if (isMemeTemplateAlreadyExist()) { // template which is created by user
+                    showOverwriteTemplateDialog()
+                } else {
+                    saveMemeAsTemplate()
+                }
                 saveBottomSheet.dismiss()
             }
 
@@ -918,6 +928,28 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             }
         })
         saveBottomSheet.show(supportFragmentManager, FRAGMENT_SAVE_BOTTOM_SHEET_TAG)
+    }
+
+    private fun showOverwriteTemplateDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setMessage(getString(R.string.str_save_meme_to_share))
+            .setMessage(getString(R.string.str_meme_template_overwrite_message))
+            .setNegativeButton(getString(R.string.str_later)) { _, i -> }
+            .setNegativeButton(getString(R.string.str_overwrite)) { _, i ->
+//                updateMemeTemplate()
+            }
+            .setPositiveButton(getString(R.string.str_save_as_new_template)) { _, i ->
+                saveMemeAsTemplate()
+            }
+            .show()
+    }
+
+    private fun isMemeTemplateAlreadyExist(): Boolean {
+        meme?.let {
+            if (it.isCreatedByUser)
+                return true
+        }
+        return false
     }
 
     // TODO cancel task on back
@@ -1119,23 +1151,9 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
         if (resultCode == RESULT_OK) {
             when (requestCode) {
-                /*CAMERA_REQUEST -> {
-                    photoEditor.clearAllViews()
-                    val photo = data?.extras!!["data"] as Bitmap?
-                    photoEditorView.source.setImageBitmap(photo)
-
-                }
-                PICK_REQUEST -> try {
-                    photoEditor.clearAllViews()
-                    val uri = data!!.data
-                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-                    photoEditorView.source.setImageBitmap(bitmap)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }*/
                 UCrop.REQUEST_CROP -> {
+                    isSomethingEdited = true
                     val resultUri = UCrop.getOutput(data!!)
-
                     photoEditor.clearAllViews()
 
                     photoEditorView.source.setImageURI(resultUri)
@@ -1317,7 +1335,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private fun saveMemeAsTemplate() {
 
         val alertDialog = KAlertDialog(this, KAlertDialog.PROGRESS_TYPE)
@@ -1327,8 +1344,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         alertDialog.setOnDismissListener {
             showInterstitialAd()
         }
-
-
         try {
             if (StorageHelper.isExternalStorageWriteable()) {
                 val templatesStorageDir = StorageHelper.getTemplatesPrivateDir()
@@ -1369,10 +1384,8 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
                             val tempFile =
                                 File(imagePath)              // Uri.parse(imagePath)
-                            mSaveImageUri = Uri.fromFile(tempFile)
                             saveMemeTemplateToDatabase(tempFile.name)
                             isSomethingEdited = false
-                            Log.d("testtesttest", "onSuccess: $imagePath")
                         }
 
                         override fun onFailure(exception: Exception) {
@@ -1381,7 +1394,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                             alertDialog.changeAlertType(KAlertDialog.ERROR_TYPE)
                             alertDialog.setCancelable(true)
                             alertDialog.setCanceledOnTouchOutside(true)
-
                         }
                     })
             } else {
@@ -1390,17 +1402,16 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                 alertDialog.setCancelable(true)
                 alertDialog.setCanceledOnTouchOutside(true)
             }
-
-
         } catch (e: IOException) {
             e.printStackTrace()
-
             alertDialog.titleText = getString(R.string.str_sorry_try_again)
             alertDialog.changeAlertType(KAlertDialog.ERROR_TYPE)
             alertDialog.setCancelable(true)
             alertDialog.setCanceledOnTouchOutside(true)
         }
     }
+
+
 
     private fun saveMemeTemplateToDatabase(fileName: String) {
         val newCaptions = mutableListOf<Caption>()
@@ -1470,7 +1481,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             tempMeme.captionSets.add(captionSet)
         }
         memeRepository.insertMeme(tempMeme)
-
     }
 
 

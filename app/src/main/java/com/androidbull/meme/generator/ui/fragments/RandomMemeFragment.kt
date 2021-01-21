@@ -139,7 +139,7 @@ class RandomMemeFragment : Fragment(), OnMemeItemClickListener {
         }
         activity?.let {
             if (it is MainActivity) {
-                it.updateToolbarIcons(listIcon, true)
+                it.updateToolBarIcons(listIcon, true)
             }
         }
     }

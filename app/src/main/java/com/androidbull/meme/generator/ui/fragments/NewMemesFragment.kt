@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -63,12 +62,12 @@ class NewMemesFragment : Fragment(), OnMemeItemClickListener {
     private fun onMemesFetched(memes: List<Meme2>) {
         newMemes.clear()
         memes.forEach { meme ->
-            if (meme.id > 1600 && !meme.isCreatedByUser)     //TODO logic to detect new Meme
+            if (meme.id > TOTAL_DEFAULT_MEMES && !meme.isCreatedByUser)     //TODO logic to detect new Meme
                 newMemes.add(meme)
         }
         newMemes.reverse()
         memeAdapter.updateAdapter(newMemes)
-        if (newMemes.isEmpty()) {
+        if (newMemes.isEmpty()) {   //TODO registerAdapterDataObserver to handle empty state (like in CustomFontActivity)
             groupEmptyView.visibility = View.VISIBLE
         } else {
             groupEmptyView.visibility = View.GONE
@@ -182,7 +181,7 @@ class NewMemesFragment : Fragment(), OnMemeItemClickListener {
 
         activity?.let {
             if (it is MainActivity) {
-                it.updateToolbarIcons(listIcon, false)
+                it.updateToolBarIcons(listIcon, false)
             }
         }
 

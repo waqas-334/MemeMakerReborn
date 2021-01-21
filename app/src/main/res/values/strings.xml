@@ -135,6 +135,10 @@
     <string name="str_large">Large</string>
     <string name="str_large_plus">Large+</string>
     <string name="str_huge">Huge</string>
+    <string name="str_overwrite">Overwrite</string>
+    <string name="str_save_as_new_template">Save as new</string>
+    <string name="str_meme_template_overwrite_message">Do you want to overwrite the existing template or want to save as a new template</string>
+    <string name="str_updating">Updating…</string>
 
 
 </resources>

@@ -192,7 +192,7 @@ class RoomMemeRepository : IMemeRepository {
         var numImagesRemoved = 0
         val resolver = AppContext.getInstance().context.contentResolver
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {   
 
             try {
                 memes.forEach {

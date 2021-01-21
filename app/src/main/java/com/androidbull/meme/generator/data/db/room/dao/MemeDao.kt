@@ -123,14 +123,15 @@ abstract class MemeDao {
     fun delete(memeId: Long) {
 
         val meme = getMemeById(memeId)
+        meme?.let {
+            deleteByMemeId(memeId)
+            deleteSearchTagsByMemeId(memeId)
 
-        deleteByMemeId(memeId)
-        deleteSearchTagsByMemeId(memeId)
-
-        meme.captionSets.forEach {
-            deleteCaptionsByCaptionSetId(it.id)
+            meme.captionSets.forEach {
+                deleteCaptionsByCaptionSetId(it.id)
+            }
+            deleteCaptionSetsByMemeId(memeId)
         }
-        deleteCaptionSetsByMemeId(memeId)
     }
 
     @Transaction
@@ -163,7 +164,7 @@ abstract class MemeDao {
 
 
     @Query("SELECT * FROM meme2 WHERE id = :memeId")
-    abstract fun getMemeById(memeId: Long): Meme2
+    abstract fun getMemeById(memeId: Long): Meme2?
 
     @Query("SELECT id FROM meme2 WHERE isCreatedByUser = 0 ORDER BY id DESC LIMIT 1;")
     abstract fun getLastMemeId(): Long

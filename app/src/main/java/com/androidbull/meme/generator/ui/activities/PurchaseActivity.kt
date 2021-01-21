@@ -54,9 +54,14 @@ class PurchaseActivity : BaseActivity(), PurchasesUpdatedListener {
 
 
     private fun showErrorDialog(errorMessage: String) {
-        progressDialog.hide()
-        ErrorDialog.newInstance(errorMessage)
-            .show(supportFragmentManager, FRAGMENT_ERROR_DIALOG_TAG)
+        try {
+            progressDialog.hide()
+            ErrorDialog.newInstance(errorMessage)
+                .show(supportFragmentManager, FRAGMENT_ERROR_DIALOG_TAG)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
     }
 
     private fun queryPurchases() {
@@ -270,8 +275,8 @@ class PurchaseActivity : BaseActivity(), PurchasesUpdatedListener {
     }
 
     override fun onDestroy() {
-        if (progressDialog != null && progressDialog.isShowing)
-        progressDialog.dismiss()
+        if (progressDialog != null)
+            progressDialog.dismiss()
         super.onDestroy()
     }
 
