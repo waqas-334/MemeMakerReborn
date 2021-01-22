@@ -48,7 +48,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.androidbull.meme.generator.helper.CheckableImageButton
+        <com.androidbull.meme.maker.helper.CheckableImageButton
             android:id="@+id/cibSelectMeme"
             android:layout_width="24dp"
             android:layout_height="24dp"

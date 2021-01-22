@@ -55,7 +55,6 @@
     <style name="SearchView" parent="Widget.AppCompat.Light.SearchView">
         <item name="searchHintIcon">@null</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
-
     </style>
 
 

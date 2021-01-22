@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:22006868555:android:06de6cf0c039355be4bbce",
+        "mobilesdk_app_id": "1:22006868555:android:adacd7e7e54c65c4e4bbce",
         "android_client_info": {
-          "package_name": "com.androidbull.meme.generator"
+          "package_name": "com.androidbull.meme.maker"
         }
       },
       "oauth_client": [

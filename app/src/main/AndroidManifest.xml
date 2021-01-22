@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.androidbull.meme.generator">
+    package="com.androidbull.meme.maker">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,11 +8,12 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:name="com.androidbull.meme.generator.App"
+        android:name="com.androidbull.meme.maker.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:hardwareAccelerated="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MemeMaker"
@@ -21,7 +21,7 @@
 
         <!--activities-->
         <activity
-            android:name="com.androidbull.meme.generator.ui.activities.SplashActivity"
+            android:name="com.androidbull.meme.maker.ui.activities.SplashActivity"
             android:theme="@style/Theme.MemeMaker.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,26 +31,26 @@
         </activity>
 
         <activity
-            android:name="com.androidbull.meme.generator.ui.activities.MainActivity"
+            android:name="com.androidbull.meme.maker.ui.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MemeMaker" />
 
-        <activity android:name="com.androidbull.meme.generator.ui.activities.PurchaseActivity" />
+        <activity android:name="com.androidbull.meme.maker.ui.activities.PurchaseActivity" />
 
         <activity
-            android:name="com.androidbull.meme.generator.ui.activities.SettingsActivity"
+            android:name="com.androidbull.meme.maker.ui.activities.SettingsActivity"
             android:label="@string/str_settings" />
 
         <activity
-            android:name="com.androidbull.meme.generator.ui.activities.CustomFontActivity"
+            android:name="com.androidbull.meme.maker.ui.activities.CustomFontActivity"
             android:label="@string/str_font_manager" />
 
         <activity
-            android:name="com.androidbull.meme.generator.ui.activities.DownloadAllMemeActivity"
+            android:name="com.androidbull.meme.maker.ui.activities.DownloadAllMemeActivity"
             android:label="@string/str_download_memes" />
 
         <activity
-            android:name="com.androidbull.meme.generator.ui.activities.MemeGeneratorActivity"
+            android:name="com.androidbull.meme.maker.ui.activities.MemeGeneratorActivity"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
@@ -67,7 +67,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.androidbull.meme.generator.fileprovider"
+            android:authorities="com.androidbull.meme.maker.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
 
