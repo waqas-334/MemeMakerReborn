@@ -1212,7 +1212,7 @@ public class PhotoEditor implements BrushViewChangeListener {
                                 Bitmap drawingCache = saveSettings.isTransparencyEnabled()
                                         ? BitmapUtil.removeTransparency(parentView.getDrawingCache())
                                         : parentView.getDrawingCache();
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                                     Uri collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
                                     File dirDest = new File(Environment.DIRECTORY_PICTURES, "MemeMaker");
 
@@ -1237,7 +1237,6 @@ public class PhotoEditor implements BrushViewChangeListener {
                                     newImage.clear();
                                     newImage.put(MediaStore.Images.Media.IS_PENDING, 0);
                                     context.getContentResolver().update(newImageUri, newImage, null, null);
-                                    Log.d(TAG, "Filed Saved Successfully (Android Q or greater)");
 
                                     imagePath = FileUtils.getPath(context, newImageUri);
 

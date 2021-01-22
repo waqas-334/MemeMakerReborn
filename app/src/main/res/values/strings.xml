@@ -83,6 +83,7 @@
     <string name="str_saving">Saving…</string>
     <string name="str_saved">Saved</string>
     <string name="str_sorry_try_again">Sorry, try again</string>
+    <string name="str_unable_to_delete_some_memes">Unable to delete some memes. Please try again</string>
     <string name="str_failed_to_save_image">Failed to save Image</string>
     <string name="str_delete_confirmation">Are you sure you want to delete?</string>
     <string name="str_deleting">Deleting…</string>
