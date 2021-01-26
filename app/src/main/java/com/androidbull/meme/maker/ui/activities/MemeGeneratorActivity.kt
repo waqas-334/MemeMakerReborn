@@ -188,12 +188,12 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             }
         }
 
-        etEditText.setOnEditorActionListener { view, actionId, _ ->
+     /*   etEditText.setOnEditorActionListener { view, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 finishEditingText()
                 true
             } else false
-        }
+        }*/
 
         etEditText.addTextChangedListener(object : TextWatcher {
 
