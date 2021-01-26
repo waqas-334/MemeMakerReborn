@@ -249,36 +249,37 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
     }
 
     private fun loadInterstitialAd() {
-        AdSettings.addTestDevice(ADS_TEST_ID)
-        interstitialAd = InterstitialAd(this, MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID)
-        val interstitialAdListener = object : InterstitialAdListener {
-            override fun onAdClicked(ad: Ad?) {
+        if (!isPremium) {
+            interstitialAd = InterstitialAd(this, MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID)
+            val interstitialAdListener = object : InterstitialAdListener {
+                override fun onAdClicked(ad: Ad?) {
+                }
+
+                override fun onError(ad: Ad?, adError: AdError?) {
+                    Log.d(TAG, "onError: ${adError?.errorMessage}")
+                }
+
+                override fun onAdLoaded(ad: Ad?) {
+                }
+
+                override fun onLoggingImpression(ad: Ad?) {
+                }
+
+                override fun onInterstitialDisplayed(ad: Ad?) {
+                }
+
+                override fun onInterstitialDismissed(ad: Ad?) {
+                    loadInterstitialAd()
+                }
             }
 
-            override fun onError(ad: Ad?, adError: AdError?) {
-                Log.d(TAG, "onError: ${adError?.errorMessage}")
+            interstitialAd?.let {
+                it.loadAd(
+                    it.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener)
+                        .build()
+                )
             }
-
-            override fun onAdLoaded(ad: Ad?) {
-            }
-
-            override fun onLoggingImpression(ad: Ad?) {
-            }
-
-            override fun onInterstitialDisplayed(ad: Ad?) {
-            }
-
-            override fun onInterstitialDismissed(ad: Ad?) {
-                loadInterstitialAd()
-            }
-        }
-
-        interstitialAd?.let {
-            it.loadAd(
-                it.buildLoadAdConfig()
-                    .withAdListener(interstitialAdListener)
-                    .build()
-            )
         }
     }
 
@@ -942,7 +943,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
             override fun onUploadNewMeme() {
 
-                val memeNameInputDialog = MemeNameInputDialog.newInstance()
+             /*   val memeNameInputDialog = MemeNameInputDialog.newInstance()
                 memeNameInputDialog.isCancelable = false
                 memeNameInputDialog.setOnSaveClickListener { memeName ->
                     uploadMeme(getCurrentMeme(memeName))
@@ -951,7 +952,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
                     supportFragmentManager,
                     FRAGMENT_MEME_NAME_INPUT_DIALOG_TAG
                 )
-                saveBottomSheet.dismiss()
+                saveBottomSheet.dismiss()*/
             }
         })
         saveBottomSheet.show(supportFragmentManager, FRAGMENT_SAVE_BOTTOM_SHEET_TAG)
@@ -979,6 +980,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         return false
     }
 
+/*
     // TODO cancel task on back
     private fun uploadMeme(currentMeme: Meme2) {
         val alertDialog = KAlertDialog(this, KAlertDialog.PROGRESS_TYPE)
@@ -1082,6 +1084,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         return tempMeme
 
     }
+*/
 
     private fun getFontSizeForScaledMemeDimensions(fontSize: Int): Int {  // fontSize is Already in dp
         val originalWidth: Float =
