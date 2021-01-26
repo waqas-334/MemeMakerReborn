@@ -6,7 +6,6 @@ import com.androidbull.meme.maker.ui.SeekBarIndicator
 
 
 private fun getFontSizeIndicatorList(context: Context): List<SeekBarIndicator> {
-    context.getString(R.string.cd_todo)
     return listOf(
         SeekBarIndicator(12, context.getString(R.string.str_tiny)),
         SeekBarIndicator(14, context.getString(R.string.str_tiny_plus)),
@@ -123,7 +122,7 @@ fun getMaxLinesFromSeekBar(tickIndex: Int): Int {
     return if (tickIndex <= maxLinesIndicatorList.size)
         maxLinesIndicatorList[(tickIndex - 1)].value
     else
-        2 // Off
+        Integer.MAX_VALUE // Auto
 }
 
 fun getTickPositionFromMaxLines(fontSize: Int): Float {
