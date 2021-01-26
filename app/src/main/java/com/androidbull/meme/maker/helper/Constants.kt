@@ -4,7 +4,7 @@ import android.Manifest
 
 const val APP_NAME = "Meme Maker"
 
-const val TOTAL_DEFAULT_MEMES = 1600
+const val TOTAL_DEFAULT_MEMES = 1713
 
 
 const val FILE_PROVIDER_AUTHORITY = "com.androidbull.meme.maker.fileprovider"
@@ -18,10 +18,10 @@ const val TEMP_SHARE_FILE = "temp_share_file.png"
 
 
 const val SUPPORT_EMAIL = "waqaryounis0341@gmail.com"
+const val APP_ABOUT_US_LINK = "https://memebox.app"
 const val PRIVACY_POLICY_LINK = "https://tictactoe-brain-games.blogspot.com/2020/08/memebox-android-app.html"
 const val MEME_SERVER_BASE_URL = "https://arsal-khan-apps.firebaseapp.com/memes/"
-const val ALL_MEMES_ZIP_URL =
-    "https://firebasestorage.googleapis.com/v0/b/arsal-khan-apps.appspot.com/o/memes_test.zip?alt=media"
+const val ALL_MEMES_ZIP_URL = "http://memebox.app/memes-v1.0.zip"
 const val MEME_DATA_ASSET_FILE = "meme2dataNew.json"
 const val ALL_MEMES_ZIP_FILE_NAME = "all_memes.zip"
 
@@ -46,6 +46,7 @@ const val PREF_IS_PREMIUM_USER = "pref_is_premium_user"
 const val PREF_ARE_NEW_MEMES_AVAILABLE = "pref_are_new_memes_available"
 const val PREF_APP_LAUNCH_COUNT = "pref_app_launch_count"
 const val PREF_IS_APP_RATED = "pref_is_app_rated"
+const val PREF_ARE_ALL_MEME_DOWNLOADED = "pref_are_all_memes_downloaded"
 
 const val TEMPLATES_STORAGE_FOLDER = "Meme Templates"
 const val All_Memes_STORAGE_FOLDER = "All Memes"

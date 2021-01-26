@@ -231,6 +231,10 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
             R.id.mi_rate_app -> {
                 openAppInPlayStore(packageName)
             }
+            R.id.mi_about -> {
+                openLinkInBrowser(this, APP_ABOUT_US_LINK)
+            }
+
         }
         closeDrawer()
         return true

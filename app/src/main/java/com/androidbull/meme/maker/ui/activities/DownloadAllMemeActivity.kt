@@ -6,12 +6,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.androidbull.meme.maker.R
-import com.androidbull.meme.maker.helper.ALL_MEMES_ZIP_FILE_NAME
-import com.androidbull.meme.maker.helper.ALL_MEMES_ZIP_URL
-import com.androidbull.meme.maker.helper.StorageHelper
+import com.androidbull.meme.maker.helper.*
 import com.androidbull.meme.maker.helper.StorageHelper.isExternalStorageWriteable
-import com.androidbull.meme.maker.helper.unzip
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tonyodev.fetch2.*
 import com.tonyodev.fetch2core.DownloadBlock
 import java.io.File
@@ -41,6 +39,11 @@ class DownloadAllMemeActivity : BaseActivity(), FetchListener {
         initUi()
         initToolbar()
         initDownloader()
+
+        if (SettingsManager.getIsAllMemesDownloaded()) {
+            tvDownloadStatus.text = getString(R.string.str_all_meme_already_downloaded)
+            btnDownload.text = getString(R.string.str_start_download_again)
+        }
 
         btnDownload.setOnClickListener {
 
@@ -169,18 +172,28 @@ class DownloadAllMemeActivity : BaseActivity(), FetchListener {
             btnDownload.text = getString(R.string.str_start_download_again)
             downloadState = MemeDownloadState.NEUTRAL
 
-            unZipMemesFile(download.file)
-
+            if (!unZipMemesFile(download.file)) {
+                val errorStr =
+                    getString(R.string.something_went_wrong)
+                tvDownloadStatus.text = errorStr
+                btnDownload.text = getString(R.string.str_start_download_again)
+                downloadState = MemeDownloadState.NEUTRAL
+                SettingsManager.saveIsAllMemesDownloaded(false)
+            } else {
+                SettingsManager.saveIsAllMemesDownloaded(true)
+            }
         } else {
             val errorStr =
                 getString(R.string.sr_download_failed, getString(R.string.file_corrupted))
             tvDownloadStatus.text = errorStr
             btnDownload.text = getString(R.string.str_start_download)
             downloadState = MemeDownloadState.NEUTRAL
+            SettingsManager.saveIsAllMemesDownloaded(false)
+
         }
     }
 
-    private fun unZipMemesFile(memeZipFilePath: String) {
+    private fun unZipMemesFile(memeZipFilePath: String): Boolean {
         try {
             if (isExternalStorageWriteable()) {
                 val memesStorageDir = StorageHelper.getMemesPrivateDir()
@@ -190,15 +203,13 @@ class DownloadAllMemeActivity : BaseActivity(), FetchListener {
                 val zipFile = File(memeZipFilePath)
                 zipFile.unzip(memesDir)
             } else {
-                Toast.makeText(
-                    this,
-                    getString(R.string.str_external_storage_busy),
-                    Toast.LENGTH_SHORT
-                ).show()
+                return false
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
+            return false
         }
+        return true
     }
 
     override fun onProgress(
@@ -233,7 +244,6 @@ class DownloadAllMemeActivity : BaseActivity(), FetchListener {
 
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         fetch.cancelAll()
@@ -250,87 +260,25 @@ class DownloadAllMemeActivity : BaseActivity(), FetchListener {
             false
         } finally {
             try {
-                if (zipfile != null) {
-                    zipfile.close()
-                }
+                zipfile?.close()
             } catch (e: IOException) {
             }
         }
     }
 
+    override fun onBackPressed() {
+        if (downloadState == MemeDownloadState.STARTED)
+            showCancelDownloadDialog()
+        else {
+            super.onBackPressed()
+        }
+    }
 
-    //PRDownloader
-    /* val fileDir = if (StorageHelper.isExternalStorageWriteable()) {
-         StorageHelper.getExternalCacheDir()
-     } else {
-         StorageHelper.getInternalCacheDir()
-     }
-
-
-     val filePath = fileDir.path + File.separator
-     val fileName = "all_memes.zip"
-
-     val file = File(filePath)
-     if (!file.exists()) {
-         file.mkdirs()
-     }
-
-
-     val downloadId = PRDownloader.download(zipUrl, filePath, fileName).build()
-         .setOnProgressListener(object : OnProgressListener {
-             override fun onProgress(progress: Progress?) {
-                 Log.d(TAG, "onProgress: ${progress.toString()}")
-             }
-         }).start(object : OnDownloadListener {
-             override fun onDownloadComplete() {
-                 Log.d(TAG, "onDownloadComplete: Download Successfully completed")
-             }
-
-             override fun onError(error: Error?) {
-                 Log.d(TAG, "onError: Error downloading file")
-             }
-         })*/
-
-    /*    GlobalScope.launch(Dispatchers.IO) {
-            try {
-
-                val dir = if (StorageHelper.isExternalStorageWriteable()) {
-                    StorageHelper.getExternalCacheStorage()
-                } else {
-                    StorageHelper.getInternalCacheStorage()
-                }
-
-                val fileDir = File(dir);
-                fileDir.mkdirs()
-
-                val filePath = dir + "all_memes" + ".zip"
-
-                val file = File(filePath);
-                if (!file.exists()) {
-                    file.createNewFile()
-                }
-
-
-                downloadFile(
-                    url = zipUrl,
-                    downloadFile = file
-                ) { bytesRead, contentLength, isDone ->
-                    launch(Dispatchers.Main) {
-                        try {
-                            val percentage = (bytesRead * 100) / contentLength
-                            Log.d(TAG, "downloadZip: $percentage%")
-                            if (isDone) {
-                                Log.d(TAG, "downloadZip: File Download Complete")
-                            }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }*/
-
+    private fun showCancelDownloadDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setMessage(resources.getString(R.string.download_memes_exit_dilaog_message))
+            .setNegativeButton(resources.getString(R.string.no)) { _, i -> }
+            .setPositiveButton(resources.getString(R.string.yes)) { _, i -> super.onBackPressed() }
+            .show()
+    }
 }

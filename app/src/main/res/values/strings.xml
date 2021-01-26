@@ -57,6 +57,7 @@
     <string name="str_not_valid_font_file">Not valid font file</string>
     <string name="str_recently_used_colors">Recently used colors:</string>
     <string name="exit_dilaog_message">Are you sure you want to exit?</string>
+    <string name="download_memes_exit_dilaog_message">Download will be canceled, are you sure you want to exit? </string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="str_text_size">Text Size</string>
@@ -140,6 +141,8 @@
     <string name="str_save_as_new_template">Save as new</string>
     <string name="str_meme_template_overwrite_message">Do you want to overwrite the existing template or want to save as a new template</string>
     <string name="str_updating">Updating…</string>
+    <string name="str_all_meme_already_downloaded">All memes have already been downloaded.</string>
+
 
 
 </resources>

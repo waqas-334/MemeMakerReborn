@@ -10,9 +10,9 @@ abstract class AdsActivity : BaseActivity() {
 
         PremiumMemberObservable.isPremiumUser.observe(this, { isPremium ->
             if (isPremium) {
-                onPremiumMemberShipAcquired()   //TODO rename function
+                onPremiumMemberShipAcquired()
             } else {
-                onPremiumMemberShipLost()       //TODO rename function
+                onPremiumMemberShipLost()
             }
         })
     }
