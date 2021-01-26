@@ -99,5 +99,10 @@ object SettingsManager {
     fun saveIsAppRated(isAppRated: Boolean) {
         preferenceManager.setBoolean(PREF_IS_APP_RATED, isAppRated)
     }
+
+    fun getIsAllMemesDownloaded() = preferenceManager.getBoolean(PREF_ARE_ALL_MEME_DOWNLOADED)
+    fun saveIsAllMemesDownloaded(isAllMemesDownloaded: Boolean) {
+        preferenceManager.setBoolean(PREF_ARE_ALL_MEME_DOWNLOADED, isAllMemesDownloaded)
+    }
 }
 
