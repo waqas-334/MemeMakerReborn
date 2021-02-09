@@ -15,13 +15,11 @@
         app:tabMode="fixed">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tiTextColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/str_text_color" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tiOutlineColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/str_outline_color" />
@@ -38,7 +36,6 @@
         app:layout_constraintTop_toBottomOf="@id/tlCaptionColor" />
 
     <TextView
-        android:id="@+id/tvRecentlyUsedColors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

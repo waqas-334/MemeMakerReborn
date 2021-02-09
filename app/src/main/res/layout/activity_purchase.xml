@@ -26,7 +26,7 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:contentDescription="@string/cd_todo"
-        android:src="@drawable/meme_maker_logo"
+        android:src="@drawable/ic_premium_meme_maker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
@@ -82,7 +82,6 @@
         app:layout_constraintTop_toBottomOf="@id/tvPremiumBenefitsOne" />
 
     <TextView
-        android:id="@+id/tvPremiumBenefitsThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"

@@ -52,7 +52,6 @@
         <activity
             android:name="com.androidbull.meme.maker.ui.activities.MemeGeneratorActivity"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter android:label="@string/meme_generator_activity_name">
                 <action android:name="android.intent.action.SEND" />
@@ -63,7 +62,7 @@
         </activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait" />
+             />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -75,14 +75,6 @@
         <item name="android:tint">@color/white</item>
     </style>
 
-    <style name="EditText">
-        <item name="android:singleLine">true</item>
-        <item name="colorControlNormal">#FFFFFF</item>
-        <item name="colorControlActivated">#FFFFFF</item>
-        <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
     <style name="MemeMakerButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/bg_button_primary</item>
         <item name="android:textColor">@color/color_text_button_primary</item>
