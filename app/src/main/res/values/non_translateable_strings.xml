@@ -6,8 +6,6 @@
     <string name="str_enter_valid_name" translatable="false">Please Enter Valid Meme Name</string>
     <string name="str_upload_new_meme" translatable="false">Upload New Meme</string>
     <string name="str_enter_meme_name" translatable="false">Enter Meme Name</string>
-    <string name="str_uploading"  translatable="false">Uploading meme…</string>
-    <string name="str_uploaded_successfully"  translatable="false">Uploaded successfully</string>
     <string name="drawer_opened" translatable="false">drawer opened</string>
     <string name="drawer_closed" translatable="false">drawer closed</string>
 

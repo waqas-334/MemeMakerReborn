@@ -37,7 +37,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/str_custom_meme"
         android:text="@string/str_custom_meme"
-        app:icon="@drawable/ic_baseline_photo_camera_24"
+        app:icon="@drawable/ic_custom_meme_illustration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

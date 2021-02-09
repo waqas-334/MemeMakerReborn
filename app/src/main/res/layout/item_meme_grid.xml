@@ -7,7 +7,6 @@
     android:layout_margin="@dimen/activity_vertical_margin_micro">
 
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cvMeme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -68,7 +67,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/ivFavourite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"

@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="isb_text_size_tick_text">
-        <item>text_string</item>
-    </string-array>
 </resources>

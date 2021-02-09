@@ -1,6 +1,6 @@
 <resources>
-    <string name="meme_generator_activity_name">Meme Generator</string>
-    <string name="str_memes">Memes</string>
+    <string name="meme_generator_activity_name" translatable="false">Meme Generator</string>
+    <string name="str_memes" translatable="false">Memes</string>
     <string name="str_saved_memes">Saved Memes</string>
     <string name="str_settings">Settings</string>
     <string name="str_share_app">Share App</string>
@@ -31,8 +31,6 @@
     <string name="str_gallery_amp_other_sources">Gallery</string>
 
     <string name="str_storage_permission_denied">Storage Permissions Denied. Memes cannot be saved. Allow storage permissions from settings</string>
-    <string name="str_storage_permission_denied_for_custom_fonts">Storage Permissions Denied. Custom Font cannot be loaded. Allow storage permissions from settings</string>
-    <string name="str_storage_permission_required_for_storage">Storage Permissions Required For Custom Fonts</string>
 
     <string name="str_storage_permission_required">Storage Permissions Required For Saved Memes</string>
     <string name="str_storage_permission_requires_for_saved_memes">Storage Permissions Required For Saved Memes. Allow storage permissions from settings</string>
@@ -57,7 +55,7 @@
     <string name="str_not_valid_font_file">Not valid font file</string>
     <string name="str_recently_used_colors">Recently used colors:</string>
     <string name="exit_dilaog_message">Are you sure you want to exit?</string>
-    <string name="download_memes_exit_dilaog_message">Download will be canceled, are you sure you want to exit? </string>
+    <string name="download_memes_exit_dilaog_message">Download will be canceled, are you sure you want to exit?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="str_text_size">Text Size</string>
@@ -111,11 +109,11 @@
     <string name="str_remove_ads_product_not_found">Remove ads product not found</string>
     <string name="str_check_playstore_login">. Check PlayStore login.</string>
     <string name="choose_one">Choose one</string>
-    <string name="share_app_message">Grab this amazing and easy to use Meme Maker, here: </string>
+    <string name="share_app_message">Grab this amazing and easy to use Meme Maker app, here: </string>
     <string name="str_how_you_feel_about_this_app">How you feel about this App?</string>
     <string name="str_happy">Happy</string>
     <string name="str_confused">Confused</string>
-    <string name="str_unhappy">UnHappy</string>
+    <string name="str_unhappy">Unhappy</string>
     <string name="str_if_you_are_unsure_about_anything_then_please_let_us_know">If you are unsure about anything, then please let us know!</string>
     <string name="str_contact_our_team">Contact our team</string>
     <string name="str_meme_maker_contact">Meme Maker Contact</string>
@@ -142,7 +140,7 @@
     <string name="str_meme_template_overwrite_message">Do you want to overwrite the existing template or want to save as a new template</string>
     <string name="str_updating">Updating…</string>
     <string name="str_all_meme_already_downloaded">All memes have already been downloaded.</string>
-
+    <string name="no_new_memes">No New Memes</string>
 
 
 </resources>

@@ -3,16 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?colorSurface">
 
-    <ImageView
-        android:id="@+id/ivMeme"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/cd_todo"
+    <androidx.cardview.widget.CardView
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/cvMeme"
+        android:layout_width="80dp"
+        android:layout_margin="8dp"
+        android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/ivMeme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/cd_todo"
+            />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/tvMemeName"
@@ -23,10 +32,10 @@
         android:ellipsize="end"
         android:gravity="start"
         android:maxLines="2"
-        app:layout_constraintBottom_toBottomOf="@id/ivMeme"
-        app:layout_constraintEnd_toStartOf="@id/cibAddToFavourites"
-        app:layout_constraintStart_toEndOf="@id/ivMeme"
-        app:layout_constraintTop_toTopOf="@+id/ivMeme" />
+        app:layout_constraintBottom_toBottomOf="@id/cvMeme"
+        app:layout_constraintEnd_toStartOf="@id/sbvFavourite"
+        app:layout_constraintStart_toEndOf="@id/cvMeme"
+        app:layout_constraintTop_toTopOf="@+id/cvMeme" />
 
     <com.androidbull.meme.maker.helper.CheckableImageButton
         android:id="@+id/cibAddToFavourites"
@@ -51,7 +60,6 @@
         app:layout_constraintTop_toTopOf="@id/tvMemeName">
 
         <ImageView
-            android:id="@+id/ivFavourite"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"

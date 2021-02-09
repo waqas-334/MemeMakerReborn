@@ -5,6 +5,8 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
+//For Deobfuscation of Native Code
+android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
 
 android {
     compileSdkVersion 30
@@ -14,14 +16,14 @@ android {
         applicationId "com.androidbull.meme.maker"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 22
+        versionName "2.0.2"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
