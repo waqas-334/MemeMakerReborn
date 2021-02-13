@@ -1308,6 +1308,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
     @SuppressLint("MissingPermission")
     private fun saveMemeToDevice() {
 
+
         val alertDialog = KAlertDialog(this, KAlertDialog.PROGRESS_TYPE)
         alertDialog.setCancelable(false)
         alertDialog.setTitleText(getString(R.string.str_saving))

@@ -29,3 +29,7 @@
 -keepclassmembers class com.androidbull.meme.maker.model.** {
       *;
 }
+
+-keep class com.developer.kalert.Rotate3dAnimation {
+    public <init>(...);
+ }
