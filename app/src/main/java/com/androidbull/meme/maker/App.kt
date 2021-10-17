@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.android.billingclient.api.*
 import com.androidbull.meme.maker.data.db.room.AppDatabase
 import com.androidbull.meme.maker.helper.*
-import com.facebook.ads.AudienceNetworkAds
+//import com.facebook.ads.AudienceNetworkAds
 
 const val TAG = "MemeMakerApp"
 
@@ -19,11 +19,11 @@ class App : Application() {
 
         AppDatabase.getInstance(this)
         AppContext.getInstance().initialize(this)
-        AudienceNetworkAds.buildInitSettings(this)
-            .withInitListener {
-                Log.d(TAG, it.message)
-            }
-            .initialize()
+//        AudienceNetworkAds.buildInitSettings(this)
+//            .withInitListener {
+//                Log.d(TAG, it.message)
+//            }
+//            .initialize()//naveed
 
         instantiateAndConnectToPlayBillingService()
 

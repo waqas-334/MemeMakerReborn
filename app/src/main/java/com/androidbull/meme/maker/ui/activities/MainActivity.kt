@@ -5,7 +5,12 @@ import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
@@ -14,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.androidbull.meme.maker.AdsUtilsTapdaq
 import com.androidbull.meme.maker.R
 import com.androidbull.meme.maker.data.repository.RoomMemeRepository
 import com.androidbull.meme.maker.helper.*
@@ -28,6 +34,13 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.tapdaq.sdk.STATUS
+import com.tapdaq.sdk.TMBannerAdView
+import com.tapdaq.sdk.Tapdaq
+import com.tapdaq.sdk.common.TMAdError
+import com.tapdaq.sdk.common.TMBannerAdSizes
+import com.tapdaq.sdk.listeners.TMAdListener
+import com.tapdaq.sdk.listeners.TMInitListener
 
 private const val MAIN_ACTIVITY_BANNER_AD_ID = "580015096002786_580077345996561"
 
@@ -43,7 +56,7 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     private var shuffleIconVisibility = false
     private var searchIconVisibility = false
 
-    private lateinit var bannerAdContainer: ViewGroup
+    private lateinit var bannerAdContainer: LinearLayout
 
     private var fragmentToReplace: Fragment? = null
     private var fragmentToReplaceTag: String = ""
@@ -55,7 +68,27 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     private val _memes = MutableLiveData<List<Meme2>>()
     val memes: LiveData<List<Meme2>>
         get() = _memes
+    private lateinit var ad: TMBannerAdView
 
+    inner class TapdaqInitListener : TMInitListener() {
+        override fun didInitialise() {
+            super.didInitialise()
+            Toast.makeText(this@MainActivity, "initilizeds", Toast.LENGTH_LONG).show()
+            AdsUtilsTapdaq.LoadInterstitial(this@MainActivity)
+
+            if(!isPremium) {
+                ad.load(this@MainActivity, TMBannerAdSizes.STANDARD, TMAdListener())
+            }
+
+
+        }
+
+        override fun didFailToInitialise(error: TMAdError) {
+            super.didFailToInitialise(error)
+            //Tapdaq failed to initialise
+            Toast.makeText(this@MainActivity, "failed", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +103,23 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
 
         getMemes()
         getNewMemeUpdates()
+
+        ad = findViewById(R.id.adBanner)
+        val config = Tapdaq.getInstance().config()
+        config.setAutoReloadAds(true)
+        config.userSubjectToGdprStatus = STATUS.TRUE //GDPR declare if user is in EU
+        config.consentStatus = STATUS.TRUE //GDPR consent must be obtained from the user
+        config.ageRestrictedUserStatus = STATUS.FALSE //Is user subject to COPPA or GDPR age restrictions//6127684108fe6c2d735d6ae0
+
+
+        Tapdaq.getInstance().initialize(
+            this,
+            "616c59d286c31c4e07c11039",
+            "cc87b3eb-ff4c-4c1e-bac1-9a94afaac183",
+            config,
+            TapdaqInitListener()
+        )
+
     }
 
 
@@ -112,19 +162,25 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     }
 
     override fun onPremiumMemberShipAcquired() {
-        AdsManager.removeAds()
+//        AdsManager.removeAds()//naveed
+        ad.destroy(this)
         hidePurchasesDrawerItem()
     }
 
     override fun onPremiumMemberShipLost() {
-        AdsManager.loadAndShowBannerAd(
-            adId = MAIN_ACTIVITY_BANNER_AD_ID,
-            adContainer = bannerAdContainer
-        )
+//        AdsManager.loadAndShowBannerAd(
+//            adId = MAIN_ACTIVITY_BANNER_AD_ID,
+//            adContainer = bannerAdContainer
+//        )
+        //naveed
+
+        ad.load(this@MainActivity, TMBannerAdSizes.STANDARD, TMAdListener())
+
     }
 
     override fun onDestroy() {
-        AdsManager.removeAd(MAIN_ACTIVITY_BANNER_AD_ID)
+//        AdsManager.removeAd(MAIN_ACTIVITY_BANNER_AD_ID)//naveed
+        ad.destroy(this)
         super.onDestroy()
     }
 
