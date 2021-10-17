@@ -28,10 +28,17 @@
             android:layout_weight="1"
             android:background="@color/white" />
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/flBannerAdContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:gravity="center"
+            android:layout_height="wrap_content" >
+            <com.tapdaq.sdk.TMBannerAdView
+                android:id="@+id/adBanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

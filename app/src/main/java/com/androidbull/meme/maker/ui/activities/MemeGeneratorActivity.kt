@@ -1,5 +1,6 @@
 package com.androidbull.meme.maker.ui.activities
 
+//import com.facebook.ads.*
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,17 +16,16 @@ import android.os.Parcelable
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import com.androidbull.meme.maker.AdsUtilsTapdaq
 import com.androidbull.meme.maker.R
 import com.androidbull.meme.maker.data.repository.RoomFontRepository
 import com.androidbull.meme.maker.data.repository.RoomMemeRepository
@@ -40,11 +40,11 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.developer.kalert.KAlertDialog
-import com.facebook.ads.*
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.tapdaq.sdk.TMBannerAdView
+import com.tapdaq.sdk.common.TMBannerAdSizes
+import com.tapdaq.sdk.listeners.TMAdListener
 import com.yalantis.ucrop.UCrop
 import ja.burhanrashid52.photoeditor.*
 import ja.burhanrashid52.photoeditor.PhotoEditor.OnSaveListener
@@ -92,7 +92,9 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
     private var editTextCaptionSetting: CaptionSetting = getDefaultCaptionSettings()
     private var isSomethingEdited = false
 
-    private var interstitialAd: InterstitialAd? = null
+//    private var interstitialAd: InterstitialAd? = null//naveed
+
+    private lateinit var ad: TMBannerAdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,6 +108,13 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             handleIntentImage()
         } catch (ex: Exception) {
             ex.printStackTrace()
+        }
+
+
+
+        ad = findViewById(R.id.adBanner)
+        if(!isPremium) {
+            ad.load(this, TMBannerAdSizes.STANDARD, TMAdListener())
         }
 
     }
@@ -237,70 +246,78 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
     }
 
     override fun onPremiumMemberShipLost() {
-        AdsManager.loadAndShowBannerAd(
-            adId = MEME_GEN_ACTIVITY_BANNER_AD_ID,
-            adContainer = bannerAdContainer
-        )
-        loadInterstitialAd()
+//        AdsManager.loadAndShowBannerAd(
+//            adId = MEME_GEN_ACTIVITY_BANNER_AD_ID,
+//            adContainer = bannerAdContainer
+//        )//naveed
+//        loadInterstitialAd()
     }
 
     override fun onPremiumMemberShipAcquired() {
-        AdsManager.removeAds()
+//        AdsManager.removeAds()//naveed
     }
 
-    private fun loadInterstitialAd() {
-        if (!isPremium) {
-            interstitialAd = InterstitialAd(this, MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID)
-            val interstitialAdListener = object : InterstitialAdListener {
-                override fun onAdClicked(ad: Ad?) {
-                }
-
-                override fun onError(ad: Ad?, adError: AdError?) {
-                    Log.d(TAG, "onError: ${adError?.errorMessage}")
-                }
-
-                override fun onAdLoaded(ad: Ad?) {
-                }
-
-                override fun onLoggingImpression(ad: Ad?) {
-                }
-
-                override fun onInterstitialDisplayed(ad: Ad?) {
-                }
-
-                override fun onInterstitialDismissed(ad: Ad?) {
-                    loadInterstitialAd()
-                }
-            }
-
-            interstitialAd?.let {
-                it.loadAd(
-                    it.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build()
-                )
-            }
-        }
-    }
+//    private fun loadInterstitialAd() {
+//        if (!isPremium) {
+//            interstitialAd = InterstitialAd(this, MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID)
+//            val interstitialAdListener = object : InterstitialAdListener {
+//                override fun onAdClicked(ad: Ad?) {
+//                }
+//
+//                override fun onError(ad: Ad?, adError: AdError?) {
+//                    Log.d(TAG, "onError: ${adError?.errorMessage}")
+//                }
+//
+//                override fun onAdLoaded(ad: Ad?) {
+//                }
+//
+//                override fun onLoggingImpression(ad: Ad?) {
+//                }
+//
+//                override fun onInterstitialDisplayed(ad: Ad?) {
+//                }
+//
+//                override fun onInterstitialDismissed(ad: Ad?) {
+//                    loadInterstitialAd()
+//                }
+//            }
+//
+//            interstitialAd?.let {
+//                it.loadAd(
+//                    it.buildLoadAdConfig()
+//                        .withAdListener(interstitialAdListener)
+//                        .build()
+//                )
+//            }
+//        }
+//    }
 
     private fun showInterstitialAd() {
-        if (interstitialAd != null) {
-            if (!interstitialAd!!.isAdLoaded) {
-                return
-            } else if (interstitialAd!!.isAdInvalidated) {
-                loadInterstitialAd()
-            } else {
-                interstitialAd!!.show()
-            }
-        } else {
-            loadInterstitialAd()
+
+        if(!isPremium)
+        {
+            AdsUtilsTapdaq.ShowInterstitial(this)
         }
+
+        Toast.makeText(this, "show", Toast.LENGTH_LONG).show()
+
+//        if (interstitialAd != null) {
+//            if (!interstitialAd!!.isAdLoaded) {
+//                return
+//            } else if (interstitialAd!!.isAdInvalidated) {
+//                loadInterstitialAd()
+//            } else {
+//                interstitialAd!!.show()
+//            }
+//        } else {
+//            loadInterstitialAd()
+//        }
     }
 
 
     override fun onDestroy() {
-        AdsManager.removeAd(MEME_GEN_ACTIVITY_BANNER_AD_ID)
-        interstitialAd?.destroy()
+//        AdsManager.removeAd(MEME_GEN_ACTIVITY_BANNER_AD_ID)//naveed
+//        interstitialAd?.destroy()
         super.onDestroy()
     }
 
@@ -1315,7 +1332,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             .show()
 
         alertDialog.setOnDismissListener {
-            showInterstitialAd()
+//            showInterstitialAd()//naveed
         }
 
         try {
@@ -1373,7 +1390,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         alertDialog.setTitleText(getString(R.string.str_saving))
             .show()
         alertDialog.setOnDismissListener {
-            showInterstitialAd()
+            showInterstitialAd()//naveed
         }
         try {
             if (StorageHelper.isExternalStorageWriteable()) {
@@ -1449,7 +1466,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             alertDialog.setTitleText(getString(R.string.str_updating))
                 .show()
             alertDialog.setOnDismissListener {
-                showInterstitialAd()
+                showInterstitialAd()//naveed
             }
             try {
                 if (StorageHelper.isExternalStorageWriteable()) {

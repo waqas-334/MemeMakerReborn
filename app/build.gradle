@@ -6,11 +6,11 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 //For Deobfuscation of Native Code
-android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
+//android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.androidbull.meme.maker"
@@ -34,9 +34,14 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility ="1.8"
+        targetCompatibility = "1.8"
     }
+
+
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -88,11 +93,18 @@ dependencies {
     implementation 'me.xdrop:fuzzywuzzy:1.3.1'
 
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
+//    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
     implementation 'com.android.billingclient:billing-ktx:3.0.2'
 
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+
+    implementation 'com.tapdaq.sdk:Tapdaq-BaseSDK:7.9.0'
+    //Adapters - These will automatically pull ad network dependencies
+//    implementation 'com.tapdaq.sdk:TapdaqChartboostAdapter:7.9.0'
+//    implementation 'com.tapdaq.sdk:TapdaqFANAdapter:7.9.0'
+
 
 }
