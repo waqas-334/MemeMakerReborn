@@ -73,7 +73,6 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     inner class TapdaqInitListener : TMInitListener() {
         override fun didInitialise() {
             super.didInitialise()
-            Toast.makeText(this@MainActivity, "initilizeds", Toast.LENGTH_LONG).show()
             AdsUtilsTapdaq.LoadInterstitial(this@MainActivity)
 
             if(!isPremium) {
@@ -86,13 +85,28 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         override fun didFailToInitialise(error: TMAdError) {
             super.didFailToInitialise(error)
             //Tapdaq failed to initialise
-            Toast.makeText(this@MainActivity, "failed", Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        ad = findViewById(R.id.adBanner)
+        val config = Tapdaq.getInstance().config()
+        config.setAutoReloadAds(true)
+        config.userSubjectToGdprStatus = STATUS.FALSE //GDPR declare if user is in EU
+        config.consentStatus = STATUS.TRUE //GDPR consent must be obtained from the user
+        config.ageRestrictedUserStatus = STATUS.FALSE //Is user subject to COPPA or GDPR age restrictions//6127684108fe6c2d735d6ae0
+
+        Tapdaq.getInstance().initialize(
+            this@MainActivity,
+            "616c59d286c31c4e07c11039",
+            "cc87b3eb-ff4c-4c1e-bac1-9a94afaac183",
+            config,
+            TapdaqInitListener()
+        )
 
         initUi()
         initActions()
@@ -104,21 +118,7 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         getMemes()
         getNewMemeUpdates()
 
-        ad = findViewById(R.id.adBanner)
-        val config = Tapdaq.getInstance().config()
-        config.setAutoReloadAds(true)
-        config.userSubjectToGdprStatus = STATUS.TRUE //GDPR declare if user is in EU
-        config.consentStatus = STATUS.TRUE //GDPR consent must be obtained from the user
-        config.ageRestrictedUserStatus = STATUS.FALSE //Is user subject to COPPA or GDPR age restrictions//6127684108fe6c2d735d6ae0
 
-
-        Tapdaq.getInstance().initialize(
-            this,
-            "616c59d286c31c4e07c11039",
-            "cc87b3eb-ff4c-4c1e-bac1-9a94afaac183",
-            config,
-            TapdaqInitListener()
-        )
 
     }
 

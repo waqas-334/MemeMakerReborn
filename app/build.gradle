@@ -103,8 +103,8 @@ dependencies {
 
     implementation 'com.tapdaq.sdk:Tapdaq-BaseSDK:7.9.0'
     //Adapters - These will automatically pull ad network dependencies
-//    implementation 'com.tapdaq.sdk:TapdaqChartboostAdapter:7.9.0'
-//    implementation 'com.tapdaq.sdk:TapdaqFANAdapter:7.9.0'
+    implementation 'com.tapdaq.sdk:TapdaqChartboostAdapter:7.9.0'
+    implementation 'com.tapdaq.sdk:TapdaqFANAdapter:7.9.0'
 
 
 }
