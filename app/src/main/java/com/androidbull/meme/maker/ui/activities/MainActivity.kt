@@ -75,9 +75,6 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
             super.didInitialise()
             AdsUtilsTapdaq.LoadInterstitial(this@MainActivity)
 
-            if(!isPremium) {
-                ad.load(this@MainActivity, TMBannerAdSizes.STANDARD, TMAdListener())
-            }
 
 
         }
@@ -173,6 +170,8 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
 //            adContainer = bannerAdContainer
 //        )
         //naveed
+
+
 
         ad.load(this@MainActivity, TMBannerAdSizes.STANDARD, TMAdListener())
 
