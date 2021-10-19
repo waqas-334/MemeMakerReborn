@@ -17,8 +17,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.*
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -113,9 +112,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
 
         ad = findViewById(R.id.adBanner)
-        if(!isPremium) {
-            ad.load(this, TMBannerAdSizes.STANDARD, TMAdListener())
-        }
+
 
     }
 
@@ -251,10 +248,17 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 //            adContainer = bannerAdContainer
 //        )//naveed
 //        loadInterstitialAd()
+
+        ad.load(this, TMBannerAdSizes.STANDARD, TMAdListener())
+
+
     }
 
     override fun onPremiumMemberShipAcquired() {
 //        AdsManager.removeAds()//naveed
+        ad.destroy(this)
+
+
     }
 
 //    private fun loadInterstitialAd() {
@@ -298,8 +302,8 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         {
             AdsUtilsTapdaq.ShowInterstitial(this)
 
-        }
 
+        }
 
 //        if (interstitialAd != null) {
 //            if (!interstitialAd!!.isAdLoaded) {
