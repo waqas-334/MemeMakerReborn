@@ -3,7 +3,9 @@ buildscript {
     ext.kotlin_version = "1.4.20"
     repositories {
         google()
+        mavenCentral()
         jcenter()
+        maven { url "https://android-sdk.tapdaq.com" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.2'
@@ -18,7 +20,10 @@ buildscript {
 
 allprojects {
     repositories {
+
+
         google()
+        mavenCentral()
         jcenter()
         maven { url "https://jitpack.io" }
         maven { url "https://android-sdk.tapdaq.com" }

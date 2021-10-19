@@ -297,9 +297,9 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         if(!isPremium)
         {
             AdsUtilsTapdaq.ShowInterstitial(this)
+
         }
 
-        Toast.makeText(this, "show", Toast.LENGTH_LONG).show()
 
 //        if (interstitialAd != null) {
 //            if (!interstitialAd!!.isAdLoaded) {
@@ -1332,7 +1332,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             .show()
 
         alertDialog.setOnDismissListener {
-//            showInterstitialAd()//naveed
+            showInterstitialAd()//naveed
         }
 
         try {

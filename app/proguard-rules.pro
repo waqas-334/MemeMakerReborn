@@ -33,3 +33,18 @@
 -keep class com.developer.kalert.Rotate3dAnimation {
     public <init>(...);
  }
+
+
+
+# tapdaq
+-keep class com.tapdaq.sdk.** { *; }
+-keep class com.tapdaq.adapters.* { *; }
+-keep class com.tapdaq.unityplugin.* { *; }
+-keep class com.google.android.gms.ads.identifier.** { *; }
+
+
+#chartboost
+-keep class com.chartboost.** { *; }
+
+#facebook
+-keep class com.facebook.ads.** { *; }
