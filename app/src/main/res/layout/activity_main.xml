@@ -32,12 +32,10 @@
             android:id="@+id/flBannerAdContainer"
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:visibility="gone"
             android:gravity="center"
-            android:layout_height="wrap_content" >
-            <com.tapdaq.sdk.TMBannerAdView
-                android:id="@+id/adBanner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:layout_height="50dp" >
+
         </LinearLayout>
 
     </LinearLayout>

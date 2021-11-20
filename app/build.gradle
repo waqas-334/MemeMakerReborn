@@ -4,6 +4,11 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'applovin-quality-service'
+}
+
+applovin {
+    apiKey "4GzTBmMrwnTlyXEXuIf5dkFdDy5E5usyANzRpOf9oTFDMzlGEeiskpLKWPXLAaSiJXrGGNp9OiuH3twRCceSRs"
 }
 //For Deobfuscation of Native Code
 //android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
@@ -16,8 +21,8 @@ android {
         applicationId "com.androidbull.meme.maker"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 23
-        versionName "2.0.3"
+        versionCode 27
+        versionName "2.0.27"
     }
 
     buildTypes {
@@ -100,11 +105,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-
-    implementation 'com.tapdaq.sdk:Tapdaq-BaseSDK:7.9.0'
-    //Adapters - These will automatically pull ad network dependencies
-    implementation 'com.tapdaq.sdk:TapdaqChartboostAdapter:7.9.0'
-    implementation 'com.tapdaq.sdk:TapdaqFANAdapter:7.9.0'
-
+    implementation 'com.applovin:applovin-sdk:+'
+    implementation 'com.applovin.mediation:adcolony-adapter:+'
+    implementation 'com.applovin.mediation:chartboost-adapter:+'
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+    implementation 'com.applovin.mediation:facebook-adapter:+'
+//    implementation 'com.applovin.mediation:google-adapter:+'
+    implementation 'com.applovin.mediation:unityads-adapter:+'
 
 }

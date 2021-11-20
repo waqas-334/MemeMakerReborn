@@ -5,12 +5,8 @@ import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
@@ -19,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.androidbull.meme.maker.AdsUtilsTapdaq
 import com.androidbull.meme.maker.R
 import com.androidbull.meme.maker.data.repository.RoomMemeRepository
 import com.androidbull.meme.maker.helper.*
@@ -29,20 +24,20 @@ import com.androidbull.meme.maker.ui.fragments.ParentMemeFragment
 import com.androidbull.meme.maker.ui.fragments.SavedMemeFragment
 import com.androidbull.meme.maker.ui.fragments.SavedTemplateFragment
 import com.androidbull.meme.maker.ui.fragments.SearchFragment
+import com.applovin.mediation.MaxAd
+import com.applovin.mediation.MaxAdViewAdListener
+import com.applovin.mediation.MaxError
+import com.applovin.mediation.ads.MaxAdView
+import com.applovin.sdk.AppLovinSdk
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.tapdaq.sdk.STATUS
-import com.tapdaq.sdk.TMBannerAdView
-import com.tapdaq.sdk.Tapdaq
-import com.tapdaq.sdk.common.TMAdError
-import com.tapdaq.sdk.common.TMBannerAdSizes
-import com.tapdaq.sdk.listeners.TMAdListener
-import com.tapdaq.sdk.listeners.TMInitListener
+
 
 private const val MAIN_ACTIVITY_BANNER_AD_ID = "580015096002786_580077345996561"
+private const val TAG = "MainActivity"
 
 class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -63,48 +58,22 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     private var shouldReplaceFragment = false
     private var addToBackstack = false
 
+
     private val searchFragment = SearchFragment()
 
     private val _memes = MutableLiveData<List<Meme2>>()
     val memes: LiveData<List<Meme2>>
         get() = _memes
-    private lateinit var ad: TMBannerAdView
 
-    inner class TapdaqInitListener : TMInitListener() {
-        override fun didInitialise() {
-            super.didInitialise()
-            AdsUtilsTapdaq.LoadInterstitial(this@MainActivity)
+    private var adView: MaxAdView? = null
 
-
-
-        }
-
-        override fun didFailToInitialise(error: TMAdError) {
-            super.didFailToInitialise(error)
-            //Tapdaq failed to initialise
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        ad = findViewById(R.id.adBanner)
-        val config = Tapdaq.getInstance().config()
-        config.setAutoReloadAds(true)
-        config.userSubjectToGdprStatus = STATUS.FALSE //GDPR declare if user is in EU
-        config.consentStatus = STATUS.TRUE //GDPR consent must be obtained from the user
-        config.ageRestrictedUserStatus = STATUS.FALSE //Is user subject to COPPA or GDPR age restrictions//6127684108fe6c2d735d6ae0
-
-        Tapdaq.getInstance().initialize(
-            this@MainActivity,
-            "616c59d286c31c4e07c11039",
-            "cc87b3eb-ff4c-4c1e-bac1-9a94afaac183",
-            config,
-            TapdaqInitListener()
-        )
-
+        initAds()
         initUi()
         initActions()
         initToolbar()
@@ -116,6 +85,74 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         getNewMemeUpdates()
 
 
+    }
+
+    private fun initAds() {
+        // Please make sure to set the mediation provider value to "max" to ensure proper functionality
+
+        if(isPremium) return
+
+        if (AppLovinSdk.getInstance(this).isInitialized) {
+            loadHomeBannerAd()
+        }
+
+        AppLovinSdk.getInstance(this).mediationProvider = "max"
+        AppLovinSdk.initializeSdk(this) {
+            // AppLovin SDK is initialized, start loading ads
+            if (it == null)
+                return@initializeSdk
+            loadHomeBannerAd()
+
+        }
+
+    }
+
+    private fun loadHomeBannerAd() {
+        adView = MaxAdView("720a9ae8ae392ada", this)
+        adView?.setListener(object : MaxAdViewAdListener {
+            override fun onAdLoaded(ad: MaxAd?) {
+                Log.i(TAG, "onAdLoaded: AppLovin: MemeGenerator Ad")
+                if(adView!!.parent!=null)
+                    (adView!!.parent as ViewGroup).removeView(adView)
+                bannerAdContainer.visibility = View.VISIBLE
+                bannerAdContainer.addView(adView)
+
+            }
+
+            override fun onAdDisplayed(ad: MaxAd?) {
+                Log.i(TAG, "onAdDisplayed: ")
+            }
+
+            override fun onAdHidden(ad: MaxAd?) {
+                Log.i(TAG, "onAdHidden: ")
+            }
+
+            override fun onAdClicked(ad: MaxAd?) {
+                Log.i(TAG, "onAdClicked: ")
+            }
+
+            override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
+                Log.e(TAG, "onAdLoadFailed: AppLovin: Meme Generator: $adUnitId")
+                bannerAdContainer.visibility = View.GONE
+
+            }
+
+            override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
+                Log.i(TAG, "onAdDisplayFailed: ")
+                bannerAdContainer.visibility = View.GONE
+
+            }
+
+            override fun onAdExpanded(ad: MaxAd?) {
+                Log.i(TAG, "onAdExpanded: ")
+            }
+
+            override fun onAdCollapsed(ad: MaxAd?) {
+                Log.i(TAG, "onAdCollapsed: ")
+            }
+
+        });
+        adView?.loadAd()
 
     }
 
@@ -160,8 +197,14 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
 
     override fun onPremiumMemberShipAcquired() {
 //        AdsManager.removeAds()//naveed
-        ad.destroy(this)
+        destroyAds()
         hidePurchasesDrawerItem()
+    }
+
+    private fun destroyAds() {
+        adView?.visibility = View.GONE;
+        adView?.stopAutoRefresh();
+
     }
 
     override fun onPremiumMemberShipLost() {
@@ -172,14 +215,12 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
         //naveed
 
 
-
-        ad.load(this@MainActivity, TMBannerAdSizes.STANDARD, TMAdListener())
-
+        initAds()
+        Log.i(TAG, "onPremiumMemberShipLost: called")
     }
 
     override fun onDestroy() {
 //        AdsManager.removeAd(MAIN_ACTIVITY_BANNER_AD_ID)//naveed
-        ad.destroy(this)
         super.onDestroy()
     }
 
