@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MemeMaker"
         android:usesCleartextTraffic="true">
-
+        <meta-data android:name="applovin.sdk.key"
+            android:value="33l0SXqTE5yJT-dEz3my-RXoexwsfZK7m9ipF1dnzx9eUt-gacda03n9CMw88GohTG-dDiLWu0CABqwlruPh-y"/>
         <!--activities-->
         <activity
             android:name="com.androidbull.meme.maker.ui.activities.SplashActivity"

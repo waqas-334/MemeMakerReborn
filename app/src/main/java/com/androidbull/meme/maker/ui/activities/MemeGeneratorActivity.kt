@@ -16,6 +16,7 @@ import android.os.Parcelable
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.view.View.*
 import android.widget.*
@@ -24,7 +25,6 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import com.androidbull.meme.maker.AdsUtilsTapdaq
 import com.androidbull.meme.maker.R
 import com.androidbull.meme.maker.data.repository.RoomFontRepository
 import com.androidbull.meme.maker.data.repository.RoomMemeRepository
@@ -32,6 +32,14 @@ import com.androidbull.meme.maker.helper.*
 import com.androidbull.meme.maker.helper.FileUtils
 import com.androidbull.meme.maker.model.*
 import com.androidbull.meme.maker.ui.dialogs.*
+import com.applovin.mediation.MaxAd
+import com.applovin.mediation.MaxAdListener
+import com.applovin.mediation.MaxAdViewAdListener
+import com.applovin.mediation.MaxError
+import com.applovin.mediation.ads.MaxAdView
+import com.applovin.mediation.ads.MaxInterstitialAd
+import com.applovin.sdk.AppLovinSdk
+import com.applovin.sdk.AppLovinSdkConfiguration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -41,19 +49,14 @@ import com.bumptech.glide.request.target.Target
 import com.developer.kalert.KAlertDialog
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.tapdaq.sdk.TMBannerAdView
-import com.tapdaq.sdk.common.TMBannerAdSizes
-import com.tapdaq.sdk.listeners.TMAdListener
 import com.yalantis.ucrop.UCrop
 import ja.burhanrashid52.photoeditor.*
 import ja.burhanrashid52.photoeditor.PhotoEditor.OnSaveListener
 import java.io.File
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
-
-private const val MEME_GEN_ACTIVITY_BANNER_AD_ID = "580015096002786_667246710612957"
-private const val MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID = "580015096002786_667245823946379"
 private const val TAG = "MemeGeneratorActivity"
 
 class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
@@ -93,7 +96,9 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
 //    private var interstitialAd: InterstitialAd? = null//naveed
 
-    private lateinit var ad: TMBannerAdView
+    private var interstitialAd: MaxInterstitialAd? = null
+    private var retryAttempt = 0
+    private var adView: MaxAdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +108,7 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         initActions()
         initToolbar()
         initPhotoEditor()
+        initAds()
         try {
             handleIntentImage()
         } catch (ex: Exception) {
@@ -110,10 +116,124 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         }
 
 
+    }
 
-        ad = findViewById(R.id.adBanner)
+    private fun initAds() {
+        if (isPremium) return
+        if (AppLovinSdk.getInstance(this).isInitialized) {
+            loadInterstitialAd()
+            loadBannerAd()
+            return
+        }
 
+        AppLovinSdk.getInstance(this).initializeSdk(object : AppLovinSdk.SdkInitializationListener {
+            override fun onSdkInitialized(config: AppLovinSdkConfiguration?) {
+                if (config == null) return
+                loadInterstitialAd()
+                loadBannerAd()
 
+            }
+
+        })
+
+    }
+
+    private fun loadBannerAd() {
+        Log.i(TAG, "loadBannerAd: called")
+        adView = MaxAdView("96796c3bb490bb24", this)
+        adView?.setListener(object : MaxAdViewAdListener {
+            override fun onAdLoaded(ad: MaxAd?) {
+                Log.i(TAG, "onAdLoaded: AppLovin: MemeGenerator Ad")
+                if(adView!!.parent!=null)
+                    (adView!!.parent as ViewGroup).removeView(adView)
+                bannerAdContainer.visibility = View.VISIBLE
+             bannerAdContainer.addView(adView)
+
+            }
+
+            override fun onAdDisplayed(ad: MaxAd?) {
+                Log.i(TAG, "onAdDisplayed: ")
+            }
+
+            override fun onAdHidden(ad: MaxAd?) {
+                Log.i(TAG, "onAdHidden: ")
+            }
+
+            override fun onAdClicked(ad: MaxAd?) {
+                Log.i(TAG, "onAdClicked: ")
+            }
+
+            override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
+                Log.e(TAG, "onAdLoadFailed: AppLovin: Meme Generator: $adUnitId")
+                bannerAdContainer.visibility = View.GONE
+
+            }
+
+            override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
+                Log.i(TAG, "onAdDisplayFailed: ")
+                bannerAdContainer.visibility = View.GONE
+
+            }
+
+            override fun onAdExpanded(ad: MaxAd?) {
+                Log.i(TAG, "onAdExpanded: ")
+            }
+
+            override fun onAdCollapsed(ad: MaxAd?) {
+                Log.i(TAG, "onAdCollapsed: ")
+            }
+
+        });
+adView?.loadAd()
+    }
+
+    private fun loadInterstitialAd() {
+
+        interstitialAd = MaxInterstitialAd("e1c5174639dcc482", this)
+        interstitialAd!!.setListener(object : MaxAdListener {
+            override fun onAdLoaded(ad: MaxAd?) {
+                Log.i(TAG, "onAdLoaded: $ad")
+            }
+
+            override fun onAdDisplayed(ad: MaxAd?) {
+
+            }
+
+            override fun onAdHidden(ad: MaxAd?) {
+                interstitialAd!!.loadAd();
+
+            }
+
+            override fun onAdClicked(ad: MaxAd?) {
+
+            }
+
+            override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
+                Log.e(TAG, "onAdLoadFailed: $adUnitId")
+                // Interstitial ad failed to load
+                // We recommend retrying with exponentially higher delays up to a maximum delay (in this case 64 seconds)
+
+                // Interstitial ad failed to load
+                // We recommend retrying with exponentially higher delays up to a maximum delay (in this case 64 seconds)
+                retryAttempt++
+                val delayMillis: Long = TimeUnit.SECONDS.toMillis(
+                    Math.pow(2.0, Math.min(6, retryAttempt).toDouble())
+                        .toLong()
+                )
+
+                Handler().postDelayed(Runnable { interstitialAd!!.loadAd() }, delayMillis)
+            }
+
+            override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
+                interstitialAd!!.loadAd();
+            }
+
+        })
+
+        // Load the first ad
+
+        // Load the first ad
+        interstitialAd!!.loadAd()
     }
 
     private fun initToolbar() {
@@ -194,12 +314,12 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             }
         }
 
-     /*   etEditText.setOnEditorActionListener { view, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                finishEditingText()
-                true
-            } else false
-        }*/
+        /*   etEditText.setOnEditorActionListener { view, actionId, _ ->
+               if (actionId == EditorInfo.IME_ACTION_DONE) {
+                   finishEditingText()
+                   true
+               } else false
+           }*/
 
         etEditText.addTextChangedListener(object : TextWatcher {
 
@@ -249,59 +369,33 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 //        )//naveed
 //        loadInterstitialAd()
 
-        ad.load(this, TMBannerAdSizes.STANDARD, TMAdListener())
+        initAds()
 
 
     }
 
     override fun onPremiumMemberShipAcquired() {
 //        AdsManager.removeAds()//naveed
-        ad.destroy(this)
+        destroyAds()
 
 
     }
 
-//    private fun loadInterstitialAd() {
-//        if (!isPremium) {
-//            interstitialAd = InterstitialAd(this, MEME_GEN_ACTIVITY_INTERSTITIAL_AD_ID)
-//            val interstitialAdListener = object : InterstitialAdListener {
-//                override fun onAdClicked(ad: Ad?) {
-//                }
-//
-//                override fun onError(ad: Ad?, adError: AdError?) {
-//                    Log.d(TAG, "onError: ${adError?.errorMessage}")
-//                }
-//
-//                override fun onAdLoaded(ad: Ad?) {
-//                }
-//
-//                override fun onLoggingImpression(ad: Ad?) {
-//                }
-//
-//                override fun onInterstitialDisplayed(ad: Ad?) {
-//                }
-//
-//                override fun onInterstitialDismissed(ad: Ad?) {
-//                    loadInterstitialAd()
-//                }
-//            }
-//
-//            interstitialAd?.let {
-//                it.loadAd(
-//                    it.buildLoadAdConfig()
-//                        .withAdListener(interstitialAdListener)
-//                        .build()
-//                )
-//            }
-//        }
-//    }
+    private fun destroyAds() {
+        //THIS function will be called when user becomes premium so we need to destroy the ad
+        interstitialAd?.destroy()
+        adView?.visibility = View.GONE;
+        adView?.stopAutoRefresh();
+    }
+
 
     private fun showInterstitialAd() {
 
-        if(!isPremium)
-        {
-            AdsUtilsTapdaq.ShowInterstitial(this)
+        if (!isPremium) {
+            if (interstitialAd?.isReady == true) {
+                interstitialAd?.showAd()
 
+            }
 
         }
 
@@ -964,16 +1058,16 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
             override fun onUploadNewMeme() {
 
-             /*   val memeNameInputDialog = MemeNameInputDialog.newInstance()
-                memeNameInputDialog.isCancelable = false
-                memeNameInputDialog.setOnSaveClickListener { memeName ->
-                    uploadMeme(getCurrentMeme(memeName))
-                }
-                memeNameInputDialog.show(
-                    supportFragmentManager,
-                    FRAGMENT_MEME_NAME_INPUT_DIALOG_TAG
-                )
-                saveBottomSheet.dismiss()*/
+                /*   val memeNameInputDialog = MemeNameInputDialog.newInstance()
+                   memeNameInputDialog.isCancelable = false
+                   memeNameInputDialog.setOnSaveClickListener { memeName ->
+                       uploadMeme(getCurrentMeme(memeName))
+                   }
+                   memeNameInputDialog.show(
+                       supportFragmentManager,
+                       FRAGMENT_MEME_NAME_INPUT_DIALOG_TAG
+                   )
+                   saveBottomSheet.dismiss()*/
             }
         })
         saveBottomSheet.show(supportFragmentManager, FRAGMENT_SAVE_BOTTOM_SHEET_TAG)
