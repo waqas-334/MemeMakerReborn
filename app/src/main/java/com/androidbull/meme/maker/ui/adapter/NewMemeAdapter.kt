@@ -1,6 +1,7 @@
 package com.androidbull.meme.maker.ui.adapter
 
 import android.animation.Animator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerDrawable
 import xyz.hanks.library.bang.SmallBangView
 
+private const val TAG = "NewMemeAdapter"
 
 class NewMemeAdapter(
     private var memes: List<Meme2>,
@@ -156,8 +158,12 @@ class NewMemeAdapter(
 
 
             try {
+                Log.i(TAG, "bind: trying: ${meme.getMemeUrl()}")
+//                val imageUrl: String =
+//                    if (meme.imageUrl.isEmpty()) MEME_SERVER_BASE_URL + meme.imageName else meme.imageUrl
+
                 Glide.with(itemView.context)
-                    .load(MEME_SERVER_BASE_URL + meme.imageName)
+                    .load(meme.getMemeUrl())
                     .placeholder(shimmerDrawable)
                     .error(R.drawable.ic_failed_loading_meme)
                     .centerCrop()

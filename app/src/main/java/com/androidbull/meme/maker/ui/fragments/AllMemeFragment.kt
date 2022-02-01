@@ -2,6 +2,7 @@ package com.androidbull.meme.maker.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+private const val TAG = "AllMemeFragment"
 class AllMemeFragment : Fragment(), OnMemeItemClickListener {
 
     private lateinit var rvMeme: RecyclerView
@@ -127,6 +129,7 @@ class AllMemeFragment : Fragment(), OnMemeItemClickListener {
 
     override fun onMemeClicked(meme: Meme2, position: Int) {
         val intent = Intent(requireActivity(), MemeGeneratorActivity::class.java)
+        Log.i(TAG, "onMemeClicked: Meme ID: $meme")
         intent.putExtra(BUNDLE_EXTRA_MEME_ID, meme.id)
         startActivity(intent)
     }

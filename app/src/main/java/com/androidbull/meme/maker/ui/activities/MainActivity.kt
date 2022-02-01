@@ -108,7 +108,7 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     }
 
     private fun loadHomeBannerAd() {
-        adView = MaxAdView("720a9ae8ae392ada", this)
+        adView = MaxAdView("725f9e0ad9685796", this)
         adView?.setListener(object : MaxAdViewAdListener {
             override fun onAdLoaded(ad: MaxAd?) {
                 Log.i(TAG, "onAdLoaded: AppLovin: MemeGenerator Ad")
@@ -190,6 +190,7 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
 
     private fun getMemes() {
         memeRepository.getAllMemesObservable().observe(this@MainActivity, {
+            Log.i(TAG, "getMemes: memes size: ${it.size}")
             _memes.value = it
         })
 

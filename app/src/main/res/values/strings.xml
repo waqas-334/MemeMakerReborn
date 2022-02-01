@@ -142,5 +142,8 @@
     <string name="str_all_meme_already_downloaded">All memes have already been downloaded.</string>
     <string name="no_new_memes">No New Memes</string>
 
+    <string name="str_uploading" translatable="false">Uploading</string>
+    <string name="str_uploaded_successfully" translatable="false">Uploaded Successfully</string>
+
 
 </resources>

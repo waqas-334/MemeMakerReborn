@@ -3,6 +3,7 @@ package com.androidbull.meme.maker.ui.adapter
 import android.animation.Animator
 import android.content.res.AssetManager
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide
 import xyz.hanks.library.bang.SmallBangView
 import java.io.IOException
 
+private const val TAG = "MemeAdapter"
 
 class MemeAdapter(
     private var memes: List<Meme2>,
@@ -33,6 +35,7 @@ class MemeAdapter(
 
     fun updateAdapter(memes: List<Meme2>) {
         this.memes = memes
+        Log.i(TAG, "updateAdapter: meme size: ${memes.size}")
         notifyDataSetChanged()
     }
 
@@ -157,10 +160,12 @@ class MemeAdapter(
                 } catch (ex: IOException) {
                 }
             } else {    // new Meme
-                Glide.with(itemView.context)
-                    .load(MEME_SERVER_BASE_URL + meme.imageName)
-                    .centerCrop()
-                    .into(ivMeme)
+
+                    Glide.with(itemView.context)
+                        .load(MEME_SERVER_BASE_URL + meme.imageName)
+                        .centerCrop()
+                        .into(ivMeme)
+
             }
         }
     }

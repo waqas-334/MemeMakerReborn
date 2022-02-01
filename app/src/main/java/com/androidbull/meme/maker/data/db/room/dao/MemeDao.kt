@@ -220,6 +220,7 @@ abstract class MemeDao {
         meme.isFavourite = memeWithCaptionSets.meme.isFavourite
         meme.isModernMeme = memeWithCaptionSets.meme.isModernMeme
         meme.isCreatedByUser = memeWithCaptionSets.meme.isCreatedByUser
+        meme.imageUrl = memeWithCaptionSets.meme.getMemeUrl()
 
         memeWithCaptionSets.captionSetsWithCaptions.forEach { captionSetWithCaptions ->
             val captionSet = CaptionSet2()

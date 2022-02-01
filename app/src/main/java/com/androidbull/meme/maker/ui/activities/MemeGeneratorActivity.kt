@@ -3,6 +3,7 @@ package com.androidbull.meme.maker.ui.activities
 //import com.facebook.ads.*
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
@@ -26,6 +27,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.androidbull.meme.maker.R
+import com.androidbull.meme.maker.data.db.room.AppDatabase
 import com.androidbull.meme.maker.data.repository.RoomFontRepository
 import com.androidbull.meme.maker.data.repository.RoomMemeRepository
 import com.androidbull.meme.maker.helper.*
@@ -47,13 +49,23 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.developer.kalert.KAlertDialog
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.yalantis.ucrop.UCrop
 import ja.burhanrashid52.photoeditor.*
 import ja.burhanrashid52.photoeditor.PhotoEditor.OnSaveListener
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.IOException
+import java.lang.Runnable
+import java.util.concurrent.Executor
+import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
@@ -100,6 +112,8 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
     private var retryAttempt = 0
     private var adView: MaxAdView? = null
 
+    private var imageURI: Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meme_creator)
@@ -140,14 +154,14 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
     private fun loadBannerAd() {
         Log.i(TAG, "loadBannerAd: called")
-        adView = MaxAdView("96796c3bb490bb24", this)
+        adView = MaxAdView("f6109da2790533d7", this)
         adView?.setListener(object : MaxAdViewAdListener {
             override fun onAdLoaded(ad: MaxAd?) {
                 Log.i(TAG, "onAdLoaded: AppLovin: MemeGenerator Ad")
-                if(adView!!.parent!=null)
+                if (adView!!.parent != null)
                     (adView!!.parent as ViewGroup).removeView(adView)
                 bannerAdContainer.visibility = View.VISIBLE
-             bannerAdContainer.addView(adView)
+                bannerAdContainer.addView(adView)
 
             }
 
@@ -184,12 +198,12 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
             }
 
         });
-adView?.loadAd()
+        adView?.loadAd()
     }
 
     private fun loadInterstitialAd() {
 
-        interstitialAd = MaxInterstitialAd("e1c5174639dcc482", this)
+        interstitialAd = MaxInterstitialAd("6866c1ffd91557ae", this)
         interstitialAd!!.setListener(object : MaxAdListener {
             override fun onAdLoaded(ad: MaxAd?) {
                 Log.i(TAG, "onAdLoaded: $ad")
@@ -439,6 +453,7 @@ adView?.loadAd()
 
             if (intentType != null && intentType.startsWith("image/")) {
                 (intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as? Uri)?.let { uri ->
+                    imageURI = uri
                     Glide.with(this)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -447,7 +462,9 @@ adView?.loadAd()
                     return
                 }
             } else if (extras != null && !extras.isEmpty) {
-
+                /**This block of code will be executed when the meme id is passed from
+                 * @{AllMemeFragment.kt} or NewMemesFragment.kt
+                 */
                 val memeId = extras.getLong(BUNDLE_EXTRA_MEME_ID)
                 if (memeId > 0) {
                     loadMeme(memeId)
@@ -455,7 +472,9 @@ adView?.loadAd()
                 }
 
                 val customCameraMemePath = extras.getString("customCameraMemePath")
+                Log.i(TAG, "handleIntentImage: customCameraMemePath: $customCameraMemePath")
                 if (!TextUtils.isEmpty(customCameraMemePath)) {
+                    imageURI = Uri.parse(customCameraMemePath)
                     Glide.with(this)
                         .load(customCameraMemePath)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -465,8 +484,11 @@ adView?.loadAd()
                 }
 
                 val customGalleryMemePath = extras.getString("customGalleryMemePath")
+
+                Log.i(TAG, "handleIntentImage: customGalleryMemePath: $customGalleryMemePath")
                 if (!TextUtils.isEmpty(customGalleryMemePath)) {
-                    val uri = Uri.parse(customGalleryMemePath)
+                    imageURI = Uri.parse(customGalleryMemePath)
+                    val uri = imageURI
                     Glide.with(this)
                         .load(uri)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -476,10 +498,12 @@ adView?.loadAd()
                 }
 
                 val saveMemePath = extras.getString("savedMemePath")
+                Log.i(TAG, "handleIntentImage: saveMemePath: $saveMemePath")
                 if (!TextUtils.isEmpty(saveMemePath)) {
-                    mSaveImageUri = Uri.parse(saveMemePath)
+                    imageURI = Uri.parse(saveMemePath)
+                    mSaveImageUri = imageURI
                     Glide.with(this)
-                        .load(Uri.parse(saveMemePath))
+                        .load(imageURI)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(photoEditorView.source)
@@ -602,6 +626,7 @@ adView?.loadAd()
     private fun loadMeme(memeId: Long) {
 
         meme = memeRepository.getMemeWithCaptionSets(memeId)
+        Log.i(TAG, "loadMeme: getMemeWithCaptionSets($memeId): $meme")
         meme?.let { meme ->
 
             supportActionBar?.let {
@@ -669,6 +694,7 @@ adView?.loadAd()
 
     private fun loadMemeFromServer(meme: Meme2) {
         val memeDownloadDialog: MemeDownloadDialog? = MemeDownloadDialog.newInstance()
+        Log.i(TAG, "loadMemeFromServer: URL: ${meme.getMemeUrl()}")
 
         //TODO dialog fragment
         val retryDialog = MaterialAlertDialogBuilder(this@MemeGeneratorActivity)
@@ -689,7 +715,7 @@ adView?.loadAd()
             FRAGMENT_MEME_DOWNLOAD_TAG
         )
         Glide.with(this)
-            .load(MEME_SERVER_BASE_URL + meme.imageName)
+            .load(meme.getMemeUrl())
             .listener(object : RequestListener<Drawable> {
 
                 override fun onResourceReady(
@@ -1031,6 +1057,8 @@ adView?.loadAd()
     private fun showSaveBottomSheet() {
         hideCaptionFrame()
         val saveBottomSheet = SaveBottomSheet()
+        saveBottomSheet.showUploadOption = (imageURI != null)
+//        saveBottomSheet.showUploadOption = false
         saveBottomSheet.setSaveOptionClickListener(object :
             SaveBottomSheet.OnSaveOptionClickListener {
             override fun onSaveToDeviceClick() {
@@ -1058,16 +1086,16 @@ adView?.loadAd()
 
             override fun onUploadNewMeme() {
 
-                /*   val memeNameInputDialog = MemeNameInputDialog.newInstance()
-                   memeNameInputDialog.isCancelable = false
-                   memeNameInputDialog.setOnSaveClickListener { memeName ->
-                       uploadMeme(getCurrentMeme(memeName))
-                   }
-                   memeNameInputDialog.show(
-                       supportFragmentManager,
-                       FRAGMENT_MEME_NAME_INPUT_DIALOG_TAG
-                   )
-                   saveBottomSheet.dismiss()*/
+                val memeNameInputDialog = MemeNameInputDialog.newInstance()
+                memeNameInputDialog.isCancelable = false
+                memeNameInputDialog.setOnSaveClickListener { memeName ->
+                    uploadMeme(memeName)
+                }
+                memeNameInputDialog.show(
+                    supportFragmentManager,
+                    FRAGMENT_MEME_NAME_INPUT_DIALOG_TAG
+                )
+                saveBottomSheet.dismiss()
             }
         })
         saveBottomSheet.show(supportFragmentManager, FRAGMENT_SAVE_BOTTOM_SHEET_TAG)
@@ -1095,41 +1123,87 @@ adView?.loadAd()
         return false
     }
 
-/*
+
     // TODO cancel task on back
-    private fun uploadMeme(currentMeme: Meme2) {
+    private fun uploadMeme(memeName: String) {
+
+        if (imageURI == null) {
+            Toast.makeText(this, "Image must be picked from Gallery or Camera", Toast.LENGTH_LONG)
+                .show()
+            return
+        }
+
         val alertDialog = KAlertDialog(this, KAlertDialog.PROGRESS_TYPE)
         alertDialog.setCancelable(false)
         alertDialog.setTitleText(getString(R.string.str_uploading))
             .show()
 
         val db = Firebase.firestore
-        db.collection(NEW_MEMES_FIRESTORE_COLLECTION).document(currentMeme.imageName)
-            .set(currentMeme)
+        val storage = Firebase.storage
+        val currentMeme = getCurrentMeme(memeName)
+
+
+        storage.reference.child("memes").child("$memeName.jpg").putFile(imageURI!!)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    alertDialog.changeAlertType(KAlertDialog.SUCCESS_TYPE)
-                    alertDialog.titleText = getString(R.string.str_uploaded_successfully)
-                    alertDialog.setCancelable(true)
-                    alertDialog.setCanceledOnTouchOutside(true)
-                    Handler(mainLooper).postDelayed({
-                        alertDialog.let {  // can be null
-                            if (it.isShowing) {
-                                it.dismissWithAnimation()
-                            }
+                    task.result.storage.downloadUrl.addOnCompleteListener {
+                        if (task.isSuccessful) {
+                            Log.i(TAG, "getCurrentMeme: uploaded meme path: ${it.result}")
+                            val path = it.result
+                            currentMeme.imageUrl = path.toString()
+
+                            db.collection(NEW_MEMES_FIRESTORE_COLLECTION)
+                                .document(currentMeme.imageName)
+                                .set(currentMeme)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        memeRepository.insertMeme(currentMeme)
+                                        Log.i(
+                                            TAG,
+                                            "uploadMeme: meme pushed successfully: $currentMeme"
+                                        )
+                                        alertDialog.changeAlertType(KAlertDialog.SUCCESS_TYPE)
+                                        alertDialog.titleText =
+                                            getString(R.string.str_uploaded_successfully)
+                                        alertDialog.setCancelable(true)
+                                        alertDialog.setCanceledOnTouchOutside(true)
+                                        Handler(mainLooper).postDelayed({
+                                            alertDialog.let {  // can be null
+                                                if (it.isShowing) {
+                                                    it.dismissWithAnimation()
+                                                }
+                                            }
+                                        }, 1500)
+                                    } else {
+                                        alertDialog.titleText =
+                                            getString(R.string.str_sorry_try_again)
+                                        alertDialog.changeAlertType(KAlertDialog.ERROR_TYPE)
+                                        alertDialog.setCancelable(true)
+                                        alertDialog.setCanceledOnTouchOutside(true)
+                                    }
+                                }
+
+
                         }
-                    }, 1500)
-                } else {
-                    alertDialog.titleText = getString(R.string.str_sorry_try_again)
-                    alertDialog.changeAlertType(KAlertDialog.ERROR_TYPE)
-                    alertDialog.setCancelable(true)
-                    alertDialog.setCanceledOnTouchOutside(true)
+
+
+                    }
                 }
             }
+
+
     }
 
     private fun getCurrentMeme(memeName: String): Meme2 {
+
+        /***
+         * This function will create a meme and set everything except the image URL
+         * That will be added when the Meme2 object is returned from here
+         */
+
+
         val newCaptions = mutableListOf<Caption>()
+
 
         val uniqueId = System.currentTimeMillis()
         val uniqueName = "$memeName$uniqueId.jpg"
@@ -1196,10 +1270,11 @@ adView?.loadAd()
             tempMeme.captionSets.add(captionSet)
         }
 
+
         return tempMeme
 
     }
-*/
+
 
     private fun getFontSizeForScaledMemeDimensions(fontSize: Int): Int {  // fontSize is Already in dp
         val originalWidth: Float =
@@ -1299,6 +1374,7 @@ adView?.loadAd()
                 UCrop.REQUEST_CROP -> {
                     isSomethingEdited = true
                     val resultUri = UCrop.getOutput(data!!)
+                    imageURI = resultUri
                     photoEditor.clearAllViews()
 
                     photoEditorView.source.setImageURI(resultUri)

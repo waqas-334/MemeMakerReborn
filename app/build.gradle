@@ -8,7 +8,7 @@ plugins {
 }
 
 applovin {
-    apiKey "4GzTBmMrwnTlyXEXuIf5dkFdDy5E5usyANzRpOf9oTFDMzlGEeiskpLKWPXLAaSiJXrGGNp9OiuH3twRCceSRs"
+    apiKey "PmeImmQKszB6lOgcfaCOriMyCgNpU8mlXVb5PuGuO3OeFmItafAX_wZJeD6APC3q2oPi4Z1SSKaqtRcr01qvRh"
 }
 //For Deobfuscation of Native Code
 //android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
@@ -21,8 +21,8 @@ android {
         applicationId "com.androidbull.meme.maker"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 27
-        versionName "2.0.27"
+        versionCode 28
+        versionName "2.0.28"
     }
 
     buildTypes {
@@ -39,10 +39,10 @@ android {
     }
 
     compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility ="1.8"
-        targetCompatibility = "1.8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+//        sourceCompatibility ="1.8"
+//        targetCompatibility = "1.8"
     }
 
 
@@ -94,6 +94,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-crashlytics:17.3.1'
     implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+
+
 //    implementation 'cat.ereza:customactivityoncrash:2.3.0'
     implementation "androidx.tonyodev.fetch2:xfetch2:3.1.5"
     implementation "com.squareup.okhttp3:okhttp:4.9.0"

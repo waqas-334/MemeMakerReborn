@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class SaveBottomSheet : BottomSheetDialogFragment() {
 
     private var onSaveOptionClickListener: OnSaveOptionClickListener? = null
+    var showUploadOption = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +31,15 @@ class SaveBottomSheet : BottomSheetDialogFragment() {
         view.findViewById<Button>(R.id.btnSaveAsTemplate).setOnClickListener {
             onSaveOptionClickListener?.onSaveAsTemplateClick()
         }
-        view.findViewById<Button>(R.id.btnUploadNewMeme).setOnClickListener {
-            onSaveOptionClickListener?.onUploadNewMeme()
-        }
+
+        val uploadButton = view.findViewById<Button>(R.id.btnUploadNewMeme)
+
+        if (!showUploadOption) {
+            uploadButton.visibility = View.GONE
+        } else
+            uploadButton.setOnClickListener {
+                onSaveOptionClickListener?.onUploadNewMeme()
+            }
     }
 
     fun setSaveOptionClickListener(onSaveOptionClickListener: OnSaveOptionClickListener) {
@@ -44,5 +51,6 @@ class SaveBottomSheet : BottomSheetDialogFragment() {
         fun onSaveAsTemplateClick()
         fun onUploadNewMeme()   //TODO remove
     }
+
 }
 
