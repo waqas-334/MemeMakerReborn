@@ -79,4 +79,4 @@ const val ADS_TEST_PRODUCT_ID_ITEM_UNAVAILABLE = "android.test.item_unavailable"
 
 
 const val PRODUCT_REMOVE_ADS_ID = "remove.ads"
-const val GOOGLE_PLAY_DEVELOPER_ID = "Nido"
+const val GOOGLE_PLAY_DEVELOPER_ID = "Ainsworth Industries"
