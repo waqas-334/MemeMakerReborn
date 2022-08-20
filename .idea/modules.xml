@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Meme_Maker.iml" filepath="$PROJECT_DIR$/.idea/modules/Meme_Maker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Meme_Maker.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.iml" filepath="$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.main.iml" filepath="$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/dialogs/Meme_Maker.dialogs.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.iml" filepath="$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.main.iml" filepath="$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/indicatorseekbar/Meme_Maker.indicatorseekbar.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.iml" filepath="$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.main.iml" filepath="$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/photoeditor/Meme_Maker.photoeditor.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.iml" filepath="$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.main.iml" filepath="$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/photoview/Meme_Maker.photoview.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.iml" filepath="$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.main.iml" filepath="$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/smallbang/Meme_Maker.smallbang.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.iml" filepath="$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/ucrop/Meme_Maker.ucrop.unitTest.iml" />
+    </modules>
+  </component>
+</project>

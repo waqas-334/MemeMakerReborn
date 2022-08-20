@@ -189,10 +189,10 @@ class MainActivity : AdsActivity(), NavigationView.OnNavigationItemSelectedListe
     }
 
     private fun getMemes() {
-        memeRepository.getAllMemesObservable().observe(this@MainActivity, {
+        memeRepository.getAllMemesObservable().observe(this@MainActivity) {
             Log.i(TAG, "getMemes: memes size: ${it.size}")
             _memes.value = it
-        })
+        }
 
     }
 

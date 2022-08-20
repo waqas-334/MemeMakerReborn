@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.iamBedant:OutlineTextView:1.0.5@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ec7295610c06a515b0a24b95554f50c/jetified-OutlineTextView-1.0.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ec7295610c06a515b0a24b95554f50c/jetified-OutlineTextView-1.0.5/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ec7295610c06a515b0a24b95554f50c/jetified-OutlineTextView-1.0.5/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.iamBedant/OutlineTextView/1.0.5/1218af5581a2833394f558b9582351eac45edee8/OutlineTextView-1.0.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

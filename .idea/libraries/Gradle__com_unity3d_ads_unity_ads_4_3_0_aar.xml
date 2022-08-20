@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.unity3d.ads:unity-ads:4.3.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce86abc0a6a50409617bbaf10ab89d2d/jetified-unity-ads-4.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce86abc0a6a50409617bbaf10ab89d2d/jetified-unity-ads-4.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce86abc0a6a50409617bbaf10ab89d2d/jetified-unity-ads-4.3.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.unity3d.ads/unity-ads/4.3.0/11d519f52dd13628e384879af7baac4546421f31/unity-ads-4.3.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.unity3d.ads/unity-ads/4.3.0/9a54790d73dbb3686bda94e84593098f28143eb2/unity-ads-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

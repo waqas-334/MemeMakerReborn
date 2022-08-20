@@ -32,8 +32,6 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 30
-        versionCode 3
-        versionName VERSION_NAME
     }
     buildTypes {
         release {

@@ -43,10 +43,10 @@ class AllMemeFragment : Fragment(), OnMemeItemClickListener {
         showCustomMemeFab()
         activity?.let {
             if (it is MainActivity) {
-                it.memes.observe(this, { memes ->
+                it.memes.observe(this) { memes ->
                     onMemeDataChanged(memes)
                     it.memes.removeObservers(this)
-                })
+                }
             }
         }
     }

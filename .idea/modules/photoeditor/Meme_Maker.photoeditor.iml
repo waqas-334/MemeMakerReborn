@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":photoeditor" external.linked.project.path="$MODULE_DIR$/../../../photoeditor" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="Meme Maker" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":photoeditor" />
+        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="4.0.2" />
+        <option name="LAST_KNOWN_AGP_VERSION" value="4.0.2" />
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
+        <afterSyncTasks>
+          <task>generateDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../photoeditor/src/main/res;file://$MODULE_DIR$/../../../photoeditor/src/debug/res;file://$MODULE_DIR$/../../../photoeditor/build/generated/res/rs/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../photoeditor/src/androidTest/res;file://$MODULE_DIR$/../../../photoeditor/src/androidTestDebug/res;file://$MODULE_DIR$/../../../photoeditor/build/generated/res/rs/androidTest/debug" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+        <option name="PROJECT_TYPE" value="1" />
+      </configuration>
+    </facet>
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="4" platform="JVM 1.8" allPlatforms="JVM [1.8]" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xallow-no-source-files" />
+        </compilerSettings>
+        <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/../../../photoeditor/build/tmp/kotlin-classes/debug" />
+          <option name="classpath" value="$MODULE_DIR$/../../../photoeditor/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/33536182580eac50f2f383c5bb514fb1/appcompat-1.2.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/c8123b901bb3a8c56ecc8af97f57e23f/jetified-core-ktx-1.3.2-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/68e807970b9c11aa16deda8d8b0e19bb/legacy-support-v13-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/66937b2c78bb822281c6a6cc4adfc170/legacy-support-v4-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/5f95961cc91a8626e12f0b939727e0be/fragment-1.1.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/662497bd521e8f936b38b703b8124cbb/jetified-appcompat-resources-1.2.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/1e43a9ef0f82778f5f3c2d39cc42795e/legacy-support-core-ui-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/1be942151dfdf1279446a7cffddf3e72/drawerlayout-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/160fefc2f6bbe1c3ba24deaa5e1646a1/viewpager-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/ff70a8b984270f5a8003ba9950001926/legacy-support-core-utils-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/bff3e99dbe4f4699451ed53fb4798ecf/loader-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/273a43d492d1f811e4e2fbdc4f45c323/jetified-activity-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/13a8f1db5e29acf57c24e52b814cb2f1/vectordrawable-animated-1.1.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/4b5868aac5adc73ebf160aacb2ce440b/vectordrawable-1.1.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/4e536b8ae08036803d403bec5237f3e7/coordinatorlayout-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/7a657ad9fb839ddf0c10ef3950dc1281/slidingpanelayout-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/7724004134bc8494b6c48bf28b76f523/customview-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/fc524919461dda7f4fcd854c9f93b32b/media-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/39ec7b1ea3c0497b83394eb1d95ad891/swiperefreshlayout-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/f51bcba62fd1b0e0ea7230a4b4932ccd/asynclayoutinflater-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/59a0626c7afbc76dbdd4ad2a191f61cf/core-1.3.2-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/d7791867f665c49631ce5fe2cd195cf7/cursoradapter-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/f110fc84a60327e3159583d6c3ea3ecd/lifecycle-runtime-2.1.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/2ecdae584bfbad5bdfb1a420dd3f8e60/versionedparcelable-1.1.0-api.jar:/Users/waqasyounis/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/11a9f7e96c3acaf93154c4c4c65890a3/lifecycle-viewmodel-2.1.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/8285452ddfd71c24aee9dcc949df8cde/jetified-savedstate-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/47fbfcc1550013c0cc1deb5220d4c75a/lifecycle-livedata-2.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/ecfeaa5c6231199dd1eac01d657e6ef1/lifecycle-livedata-core-2.0.0-api.jar:/Users/waqasyounis/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.1.0/c67e7807d9cd6c329b9d0218b2ec4e505dd340b7/lifecycle-common-2.1.0.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/91d8762c764a6ca3fdedf3c160a560c4/core-runtime-2.0.0-api.jar:/Users/waqasyounis/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/1c8e499af74f655a9f5dc90b06104a57/interpolator-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/e604f227134b89c90ac0c7a10fb76101/documentfile-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/2f3b0bd76fa2b5593597afc6850e60ee/localbroadcastmanager-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/61671b3e4df1b41987c2b7455e638010/print-1.0.0-api.jar:/Users/waqasyounis/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.1.0/e3a6fb2f40e3a3842e6b7472628ba4ce416ea4c8/annotation-1.1.0.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/96fd71bafa79f0ede6ebb24f36f289e3/jetified-kotlin-stdlib-1.6.0.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/70c20f5c0f4febdda0f72266a8bed09a/jetified-annotations-13.0.jar:/Users/waqasyounis/.gradle/caches/transforms-2/files-2.1/73a08c526c02b3a4a5f8e97cff42ffac/jetified-kotlin-stdlib-common-1.6.0.jar:/Users/waqasyounis/AndroidStudioProjects/MemeMakerReborn/photoview/build/intermediates/compile_library_classes_jar/debug/classes.jar:/Users/waqasyounis/Library/Android/sdk/platforms/android-30/android.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="moduleName" value="photoeditor_debug" />
+          <option name="jvmTarget" value="1.8" />
+          <option name="languageVersion" value="1.6" />
+          <option name="apiVersion" value="1.6" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array>
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.6.0/aa8da3bedc53c89219b84a0b40c7419431a13e76/kotlin-compiler-embeddable-1.6.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.6.0/a215a7f914d5916dc5fd2d45cea16524e0220203/kotlin-reflect-1.6.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.0/a40b8b22529b733892edf4b73468ce598bb17f04/kotlin-stdlib-1.6.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.0/7857e365f925cfa060f941c1357cda1f8790502c/kotlin-stdlib-common-1.6.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.6.0/55f72526ddcff6fc77d72cdf949c7e3d9bd95620/kotlin-script-runtime-1.6.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-embeddable/1.6.0/d6242b37f4ce6b637d10847c7558446272ec8432/kotlin-daemon-embeddable-1.6.0.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20181211/216c2e14b070f334479d800987affe4054cd563f/trove4j-1.0.20181211.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.6.0/330f2244e9030119ab3030fc3fededc86713d9cc/jna-5.6.0.jar" />
+            </array>
+          </option>
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+    <output url="file://$MODULE_DIR$/../../../photoeditor/build/intermediates/javac/debug/classes" />
+    <output-test url="file://$MODULE_DIR$/../../../photoeditor/build/intermediates/javac/debugUnitTest/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../photoeditor">
+      <excludeFolder url="file://$MODULE_DIR$/../../../photoeditor/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../photoeditor/build" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Gradle: kaptGeneratedClasses">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../photoeditor/build/tmp/kapt3/classes/debug" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: kaptGeneratedTestClasses">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../photoeditor/build/tmp/kapt3/classes/debugUnitTest" />
+          <root url="file://$MODULE_DIR$/../../../photoeditor/build/tmp/kapt3/classes/debugAndroidTest" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

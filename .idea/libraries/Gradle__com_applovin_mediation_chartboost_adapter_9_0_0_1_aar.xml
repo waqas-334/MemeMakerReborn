@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.applovin.mediation:chartboost-adapter:9.0.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b5a31a72a38b39aacf02cbfbdd1e00a/jetified-chartboost-adapter-9.0.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b5a31a72a38b39aacf02cbfbdd1e00a/jetified-chartboost-adapter-9.0.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b5a31a72a38b39aacf02cbfbdd1e00a/jetified-chartboost-adapter-9.0.0.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.applovin.mediation/chartboost-adapter/9.0.0.1/df67bdcb693d77925498b4a6c19c147599879a38/chartboost-adapter-9.0.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

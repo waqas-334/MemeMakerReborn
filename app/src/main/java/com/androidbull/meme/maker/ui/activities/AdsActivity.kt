@@ -8,7 +8,7 @@ abstract class AdsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PremiumMemberObservable.isPremiumUser.observe(this, { isPremium ->
+        PremiumMemberObservable.isPremiumUser.observe(this) { isPremium ->
             if (isPremium) {
                 this.isPremium = true
                 onPremiumMemberShipAcquired()
@@ -16,7 +16,7 @@ abstract class AdsActivity : BaseActivity() {
                 this.isPremium = false
                 onPremiumMemberShipLost()
             }
-        })
+        }
     }
 
     protected abstract fun onPremiumMemberShipLost()
