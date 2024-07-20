@@ -32,14 +32,6 @@ import com.androidbull.meme.maker.helper.*
 import com.androidbull.meme.maker.helper.FileUtils
 import com.androidbull.meme.maker.model.*
 import com.androidbull.meme.maker.ui.dialogs.*
-import com.applovin.mediation.MaxAd
-import com.applovin.mediation.MaxAdListener
-import com.applovin.mediation.MaxAdViewAdListener
-import com.applovin.mediation.MaxError
-import com.applovin.mediation.ads.MaxAdView
-import com.applovin.mediation.ads.MaxInterstitialAd
-import com.applovin.sdk.AppLovinSdk
-import com.applovin.sdk.AppLovinSdkConfiguration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -96,9 +88,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
 
 //    private var interstitialAd: InterstitialAd? = null//naveed
 
-    private var interstitialAd: MaxInterstitialAd? = null
-    private var retryAttempt = 0
-    private var adView: MaxAdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +97,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         initActions()
         initToolbar()
         initPhotoEditor()
-        initAds()
         try {
             handleIntentImage()
         } catch (ex: Exception) {
@@ -116,124 +104,6 @@ class MemeGeneratorActivity : AdsActivity(), OnPhotoEditorListener {
         }
 
 
-    }
-
-    private fun initAds() {
-        if (isPremium) return
-        if (AppLovinSdk.getInstance(this).isInitialized) {
-            loadInterstitialAd()
-            loadBannerAd()
-            return
-        }
-
-        AppLovinSdk.getInstance(this).initializeSdk(object : AppLovinSdk.SdkInitializationListener {
-            override fun onSdkInitialized(config: AppLovinSdkConfiguration?) {
-                if (config == null) return
-                loadInterstitialAd()
-                loadBannerAd()
-
-            }
-
-        })
-
-    }
-
-    private fun loadBannerAd() {
-        Log.i(TAG, "loadBannerAd: called")
-        adView = MaxAdView("96796c3bb490bb24", this)
-        adView?.setListener(object : MaxAdViewAdListener {
-            override fun onAdLoaded(ad: MaxAd?) {
-                Log.i(TAG, "onAdLoaded: AppLovin: MemeGenerator Ad")
-                if(adView!!.parent!=null)
-                    (adView!!.parent as ViewGroup).removeView(adView)
-                bannerAdContainer.visibility = View.VISIBLE
-             bannerAdContainer.addView(adView)
-
-            }
-
-            override fun onAdDisplayed(ad: MaxAd?) {
-                Log.i(TAG, "onAdDisplayed: ")
-            }
-
-            override fun onAdHidden(ad: MaxAd?) {
-                Log.i(TAG, "onAdHidden: ")
-            }
-
-            override fun onAdClicked(ad: MaxAd?) {
-                Log.i(TAG, "onAdClicked: ")
-            }
-
-            override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
-                Log.e(TAG, "onAdLoadFailed: AppLovin: Meme Generator: $adUnitId")
-                bannerAdContainer.visibility = View.GONE
-
-            }
-
-            override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
-                Log.i(TAG, "onAdDisplayFailed: ")
-                bannerAdContainer.visibility = View.GONE
-
-            }
-
-            override fun onAdExpanded(ad: MaxAd?) {
-                Log.i(TAG, "onAdExpanded: ")
-            }
-
-            override fun onAdCollapsed(ad: MaxAd?) {
-                Log.i(TAG, "onAdCollapsed: ")
-            }
-
-        });
-adView?.loadAd()
-    }
-
-    private fun loadInterstitialAd() {
-
-        interstitialAd = MaxInterstitialAd("e1c5174639dcc482", this)
-        interstitialAd!!.setListener(object : MaxAdListener {
-            override fun onAdLoaded(ad: MaxAd?) {
-                Log.i(TAG, "onAdLoaded: $ad")
-            }
-
-            override fun onAdDisplayed(ad: MaxAd?) {
-
-            }
-
-            override fun onAdHidden(ad: MaxAd?) {
-                interstitialAd!!.loadAd();
-
-            }
-
-            override fun onAdClicked(ad: MaxAd?) {
-
-            }
-
-            override fun onAdLoadFailed(adUnitId: String?, error: MaxError?) {
-                Log.e(TAG, "onAdLoadFailed: $adUnitId")
-                // Interstitial ad failed to load
-                // We recommend retrying with exponentially higher delays up to a maximum delay (in this case 64 seconds)
-
-                // Interstitial ad failed to load
-                // We recommend retrying with exponentially higher delays up to a maximum delay (in this case 64 seconds)
-                retryAttempt++
-                val delayMillis: Long = TimeUnit.SECONDS.toMillis(
-                    Math.pow(2.0, Math.min(6, retryAttempt).toDouble())
-                        .toLong()
-                )
-
-                Handler().postDelayed(Runnable { interstitialAd!!.loadAd() }, delayMillis)
-            }
-
-            override fun onAdDisplayFailed(ad: MaxAd?, error: MaxError?) {
-                interstitialAd!!.loadAd();
-            }
-
-        })
-
-        // Load the first ad
-
-        // Load the first ad
-        interstitialAd!!.loadAd()
     }
 
     private fun initToolbar() {
@@ -363,60 +233,12 @@ adView?.loadAd()
     }
 
     override fun onPremiumMemberShipLost() {
-//        AdsManager.loadAndShowBannerAd(
-//            adId = MEME_GEN_ACTIVITY_BANNER_AD_ID,
-//            adContainer = bannerAdContainer
-//        )//naveed
-//        loadInterstitialAd()
-
-        initAds()
-
 
     }
 
     override fun onPremiumMemberShipAcquired() {
 //        AdsManager.removeAds()//naveed
-        destroyAds()
 
-
-    }
-
-    private fun destroyAds() {
-        //THIS function will be called when user becomes premium so we need to destroy the ad
-        interstitialAd?.destroy()
-        adView?.visibility = View.GONE;
-        adView?.stopAutoRefresh();
-    }
-
-
-    private fun showInterstitialAd() {
-
-        if (!isPremium) {
-            if (interstitialAd?.isReady == true) {
-                interstitialAd?.showAd()
-
-            }
-
-        }
-
-//        if (interstitialAd != null) {
-//            if (!interstitialAd!!.isAdLoaded) {
-//                return
-//            } else if (interstitialAd!!.isAdInvalidated) {
-//                loadInterstitialAd()
-//            } else {
-//                interstitialAd!!.show()
-//            }
-//        } else {
-//            loadInterstitialAd()
-//        }
-    }
-
-
-    override fun onDestroy() {
-//        AdsManager.removeAd(MEME_GEN_ACTIVITY_BANNER_AD_ID)//naveed
-//        interstitialAd?.destroy()
-        super.onDestroy()
     }
 
 
@@ -1429,9 +1251,6 @@ adView?.loadAd()
         alertDialog.setTitleText(getString(R.string.str_saving))
             .show()
 
-        alertDialog.setOnDismissListener {
-            showInterstitialAd()//naveed
-        }
 
         try {
 
@@ -1487,9 +1306,6 @@ adView?.loadAd()
         alertDialog.setCancelable(false)
         alertDialog.setTitleText(getString(R.string.str_saving))
             .show()
-        alertDialog.setOnDismissListener {
-            showInterstitialAd()//naveed
-        }
         try {
             if (StorageHelper.isExternalStorageWriteable()) {
                 val templatesStorageDir = StorageHelper.getTemplatesPrivateDir()
@@ -1563,9 +1379,6 @@ adView?.loadAd()
             alertDialog.setCancelable(false)
             alertDialog.setTitleText(getString(R.string.str_updating))
                 .show()
-            alertDialog.setOnDismissListener {
-                showInterstitialAd()//naveed
-            }
             try {
                 if (StorageHelper.isExternalStorageWriteable()) {
                     val templatesStorageDir = StorageHelper.getTemplatesPrivateDir()
