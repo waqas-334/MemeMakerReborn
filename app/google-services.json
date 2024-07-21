@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "22006868555",
+    "firebase_url": "https://arsal-khan-apps.firebaseio.com",
+    "project_id": "arsal-khan-apps",
+    "storage_bucket": "arsal-khan-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22006868555:android:adacd7e7e54c65c4e4bbce",
+        "android_client_info": {
+          "package_name": "com.androidbull.meme.maker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgtNwg4lQ1cDYaAkUE6aCTPQots4GpEO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22006868555-5o46hvo3m35cv0n9kqoc7s9qim2i5pu3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterAvatarMaker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22006868555:android:c75ee8bf34296103e4bbce",
+        "android_client_info": {
+          "package_name": "com.businessapps.avatarmakerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgtNwg4lQ1cDYaAkUE6aCTPQots4GpEO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22006868555-5o46hvo3m35cv0n9kqoc7s9qim2i5pu3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterAvatarMaker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22006868555:android:864c93bb3d834b5ae4bbce",
+        "android_client_info": {
+          "package_name": "com.umac.volumebooster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgtNwg4lQ1cDYaAkUE6aCTPQots4GpEO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22006868555-d8bkre57e4kavangc75isae8c13poe9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22006868555-5o46hvo3m35cv0n9kqoc7s9qim2i5pu3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterAvatarMaker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
