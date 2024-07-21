@@ -15,6 +15,7 @@
 local.properties
 /app/release/
 /dialogs/build/
+/app/google-services.json
 
 # Project exclude paths
 /photoview/build/
